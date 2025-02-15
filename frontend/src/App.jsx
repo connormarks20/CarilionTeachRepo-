@@ -4,9 +4,10 @@ import Form from "./Form";
 function App() {
   const [backendMessage, setBackendMessage] = useState("Loading...");
 
-  // Fetch data from the backend when the component mounts
+  // gets data from backend when the component mounts 
   useEffect(() => {
-    fetch("http://localhost:5000/") // Adjust the port if necessary
+
+    fetch("http://localhost:5000/") // this port might need to be changed depending on people's systems. 
       .then((res) => res.text())
       .then((data) => setBackendMessage(data))
       .catch(() => setBackendMessage("Could not connect to backend"));
