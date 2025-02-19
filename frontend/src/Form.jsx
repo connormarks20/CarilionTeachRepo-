@@ -27,7 +27,7 @@ function Form() {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Enter some kindaa nameee testt"
+          placeholder="Enter your name"
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
