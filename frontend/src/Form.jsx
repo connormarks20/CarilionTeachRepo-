@@ -27,7 +27,7 @@ function Form() {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Enter your name"
+          placeholder="Further testing needs to be done."
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
