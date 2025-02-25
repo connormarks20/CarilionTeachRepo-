@@ -1,27 +1,21 @@
-import { useEffect, useState } from "react";
-import Form from "./Form";
+import { HashRouter as Router, Routes, Route } from 'react-router-dom' /* Import for page routing */
+import { Home } from "./Pages/Home" /* Home page */
+import { Question1 } from "./Pages/Question1" /* Question 1 page */
+import { Question2 } from "./Pages/Question2" /* Question 2 page */
+import { Question3 } from "./Pages/Question3" /* Question 3 page */
+import { Question4 } from "./Pages/Question4" /* Question 4 page */
 
 function App() {
-  const [backendMessage, setBackendMessage] = useState("Loading...");
-
-  // gets data from backend when the component mounts 
-  useEffect(() => {
-
-    fetch("http://localhost:5000/") // this port might need to be changed depending on people's systems. 
-      .then((res) => res.text())
-      .then((data) => setBackendMessage(data))
-      .catch(() => setBackendMessage("Could not connect to backend"));
-  }, []);
-
   return (
-    <div style={{ textAlign: "center", padding: "20px", fontFamily: "Arial, sans-serif" }}>
-      <h1>Carilion TEACH</h1>
-      <p style={{ fontSize: "18px", fontWeight: "bold" }}>
-        Backend Response: {backendMessage}
-      </p>
-      <hr style={{ margin: "20px 0" }} />
-      <Form />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/Question1" element={<Question1/>}/>
+        <Route path="/Question2" element={<Question2/>}/>
+        <Route path="/Question3" element={<Question3/>}/>
+        <Route path="/Question4" element={<Question4/>}/>
+      </Routes>
+    </Router>
   );
 }
 
