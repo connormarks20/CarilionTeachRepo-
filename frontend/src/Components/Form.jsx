@@ -26,12 +26,12 @@ function Form() {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Your Name"
+          placeholder="Further testing needs to be done."
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
           style={{
-            width: "100%",
+            width: "90%",  // centers within form
             padding: "10px",
             margin: "5px 0",
             border: "1px solid #ccc",
@@ -45,7 +45,7 @@ function Form() {
           onChange={(e) => setFeedback(e.target.value)}
           required
           style={{
-            width: "100%",
+            width: "90%",  // centers within form
             padding: "10px",
             margin: "5px 0",
             border: "1px solid #ccc",
