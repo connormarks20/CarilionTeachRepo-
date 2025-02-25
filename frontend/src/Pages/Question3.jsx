@@ -12,10 +12,12 @@ export function Question3() {
     };
 
     return (
-        <>
+        <div>
             <h1> This is Question 3 </h1>
-            <button onClick={backwardNav}> Prev Page </button>
-            <button onClick={forwardNav}> Next Page </button>
-        </>
-    )
+            <div style = {{display: "flex", justifyContent: "space-between"}}>
+                <button onClick={backwardNav}> Prev Page </button>
+                <button onClick={forwardNav}> Next Page </button>
+            </div>
+        </div>
+    );
 }

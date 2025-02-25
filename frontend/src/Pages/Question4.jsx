@@ -8,14 +8,16 @@ export function Question4() {
     };
 
     const forwardNav = () => {
-        // navigate("/Question4");
+        // navigate("/");   possibly go back to home
     };
 
     return (
-        <>
+        <div>
             <h1> This is Question 4 </h1>
-            <button onClick={backwardNav}> Prev Page </button>
-            <button onClick={forwardNav}> Next Page </button>
-        </>
-    )
+            <div style = {{display: "flex", justifyContent: "space-between"}}>
+                <button onClick={backwardNav}> Prev Page </button>
+                <button onClick={forwardNav}> Next Page </button>
+            </div>
+        </div>
+    );
 }
