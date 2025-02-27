@@ -3,6 +3,7 @@ import Form from "../Components/Form.jsx";
 import ProgressBar from "../Components/ProgressBar.jsx";
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router";
+import Questions from "./Questions.jsx";
 
 export function Home() {
     const [backendMessage, setBackendMessage] = useState("Loading...");
@@ -20,7 +21,7 @@ export function Home() {
 
     // Increases progress on progress bar and navigates to next page
     const startSurvey = () => {
-        navigate("/Question1");         
+        navigate("/Questions");         
     };
 
     return (
@@ -30,11 +31,6 @@ export function Home() {
             Backend Response: {backendMessage}
         </p>
         <hr style={{ margin: "20px 0" }} />
-        <ProgressBar
-                    bgcolor="orange"
-                    progress={progress}
-                    height={30}
-                />
         <Form />
         <button onClick={startSurvey}> Start </button>
         </div>
