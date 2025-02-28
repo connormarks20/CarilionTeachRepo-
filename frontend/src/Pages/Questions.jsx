@@ -8,6 +8,7 @@ const Questions = () => {
     // States for questions
     let [index, setIndex] = useState(0); /* Question index state variable */
     let [question, setQuestion] = useState(questiondata[index]); /* Question data state variable */
+    let [answers, setAnswers] = useState([]);  /* Answer data stored in array */
 
     // Progress bar variables
     const [progress, setProgress] = useState(0); /* Progress bar state variable */
@@ -31,6 +32,9 @@ const Questions = () => {
         if (index - 1 >= 0) {
             setIndex(--index);
             setQuestion(questiondata[index]);
+
+            // Retrieve previous answer
+            setSelectedOption(answers[index]);
         }
         
         // Update progress bar 
@@ -43,6 +47,15 @@ const Questions = () => {
         if (index + 1 < questiondata.length) {
             setIndex(++index);
             setQuestion(questiondata[index]);
+
+            // Retrieve old answer if applicable, else set empty selection
+            if (answers[index] != null) {
+                setSelectedOption(answers[index]);
+            }
+            else {
+                setSelectedOption(null);
+            }
+            
         }
         else {
             // Survey is complete
@@ -52,6 +65,19 @@ const Questions = () => {
         // Update progress bar
         setProgress(Math.min(100, (index + 1) * interval));
     };
+
+    // Handles the selection of an answer
+    const handleSelection = (questionIndex, option) => {
+        // Set current selected option
+        setSelectedOption(option);
+        
+        // Updates the entire answers array, adding the new answer
+        setAnswers((prevAnswers) => {
+            const newAnswers = [...prevAnswers];
+            newAnswers[questionIndex] = option;
+            return newAnswers;
+        });
+    }
 
     return (
         <div>
@@ -68,7 +94,7 @@ const Questions = () => {
                         name="answer" 
                         value={question.option1} 
                         checked={selectedOption === question.option1}
-                        onChange={() => setSelectedOption(question.option1)}/>
+                        onChange={() => handleSelection(index, question.option1)}/>
                     {question.option1}
                 </label>
 
@@ -81,7 +107,7 @@ const Questions = () => {
                         name="answer" 
                         value={question.option2} 
                         checked={selectedOption === question.option2}
-                        onChange={() => setSelectedOption(question.option2)}/>
+                        onChange={() => handleSelection(index, question.option2)}/>
                     {question.option2}
                 </label>
 
@@ -94,7 +120,7 @@ const Questions = () => {
                         name="answer" 
                         value={question.option3} 
                         checked={selectedOption === question.option3}
-                        onChange={() => setSelectedOption(question.option3)}/>
+                        onChange={() => handleSelection(index, question.option3)}/>
                     {question.option3}
                 </label>
 
@@ -107,7 +133,7 @@ const Questions = () => {
                         name="answer" 
                         value={question.option4} 
                         checked={selectedOption === question.option4}
-                        onChange={() => setSelectedOption(question.option4)}/>
+                        onChange={() => handleSelection(index, question.option4)}/>
                     {question.option4}
                 </label>
 
@@ -120,7 +146,7 @@ const Questions = () => {
                         name="answer" 
                         value={question.option5} 
                         checked={selectedOption === question.option5}
-                        onChange={() => setSelectedOption(question.option5)}/>
+                        onChange={() => handleSelection(index, question.option5)}/>
                     {question.option5}
                 </label>
             </div>
