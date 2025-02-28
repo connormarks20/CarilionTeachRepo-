@@ -2,13 +2,21 @@ import { useRef, useState } from "react";
 import { questiondata } from "../assets/questiondata.js";
 import ProgressBar from "../Components/ProgressBar.jsx";
 import { useNavigate } from "react-router";
+import './Questions.css';
 
 const Questions = () => {
     // States for questions
     let [index, setIndex] = useState(0); /* Question index state variable */
     let [question, setQuestion] = useState(questiondata[index]); /* Question data state variable */
+
+    // Progress bar variables
     const [progress, setProgress] = useState(0); /* Progress bar state variable */
     const interval = 100 / questiondata.length; /* Progress bar step size */
+
+    // Radio button variables
+    const [selectedOption, setSelectedOption] = useState('');
+
+    // Navigation variables
     let navigate = useNavigate(); /* Router navigation variable */
 
     // References for current question answer choices
@@ -50,12 +58,73 @@ const Questions = () => {
             <h1> test </h1>
             <hr />
             <h2>{question.question}</h2>
-            <ul>
-                <li ref={Option1}>{question.option1}</li>
-                <li ref={Option2}>{question.option2}</li>
-                <li ref={Option3}>{question.option3}</li>
-                <li ref={Option4}>{question.option4}</li>
-            </ul>
+            <form>
+            <div className="radio-group">
+                <label 
+                    className={`radio-box ${selectedOption === question.option1 ? "selected" : ""}`}
+                    style={{ backgroundColor: "#81b5da" }}>
+                    <input 
+                        type="radio" 
+                        name="answer" 
+                        value={question.option1} 
+                        checked={selectedOption === question.option1}
+                        onChange={() => setSelectedOption(question.option1)}/>
+                    {question.option1}
+                </label>
+
+                <label 
+                    className={`radio-box ${selectedOption === question.option2 ? "selected" : ""}`}
+                    style={{ backgroundColor: "#669bc4" }}>
+
+                    <input 
+                        type="radio" 
+                        name="answer" 
+                        value={question.option2} 
+                        checked={selectedOption === question.option2}
+                        onChange={() => setSelectedOption(question.option2)}/>
+                    {question.option2}
+                </label>
+
+                <label 
+                    className={`radio-box ${selectedOption === question.option3 ? "selected" : ""}`}
+                    style={{ backgroundColor: "#477caa" }}>
+
+                    <input 
+                        type="radio" 
+                        name="answer" 
+                        value={question.option3} 
+                        checked={selectedOption === question.option3}
+                        onChange={() => setSelectedOption(question.option3)}/>
+                    {question.option3}
+                </label>
+
+                <label 
+                    className={`radio-box ${selectedOption === question.option4 ? "selected" : ""}`}
+                    style={{ backgroundColor: "#2b6192" }}>
+
+                    <input 
+                        type="radio" 
+                        name="answer" 
+                        value={question.option4} 
+                        checked={selectedOption === question.option4}
+                        onChange={() => setSelectedOption(question.option4)}/>
+                    {question.option4}
+                </label>
+
+                <label 
+                    className={`radio-box ${selectedOption === question.option5 ? "selected" : ""}`}
+                    style={{ backgroundColor: "#0d4379" }}>
+
+                    <input 
+                        type="radio" 
+                        name="answer" 
+                        value={question.option5} 
+                        checked={selectedOption === question.option5}
+                        onChange={() => setSelectedOption(question.option5)}/>
+                    {question.option5}
+                </label>
+            </div>
+        </form>
 
             {/* Nests progress bar between the Back and Next buttons */}
             <div style={{ display: "flex", alignItems: "center", gap: "10px", width: "100%" }}>
