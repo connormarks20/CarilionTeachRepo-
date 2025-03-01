@@ -3,6 +3,7 @@ import { questiondata } from "../assets/questiondata.js";
 import ProgressBar from "../Components/ProgressBar.jsx";
 import { useNavigate } from "react-router";
 import './Questions.css';
+import TeachLogo from "../assets/teachlogowhite.jpg";  
 
 const Questions = () => {
     // Question/answer variables
@@ -10,6 +11,7 @@ const Questions = () => {
     let [question, setQuestion] = useState(questiondata[index]); /* Question data state variable */
     let [answers, setAnswers] = useState([]);  /* Answer data stored in array */
     const [weaknessAreas, setWeaknessAreas] = useState([]); /* Low scoring answers stored in array */
+    let [showError, setShowError] = useState(false); /* Shows an error if a user selects 'Next' without choosing an answer */
 
     // Progress bar variables
     const [progress, setProgress] = useState(0); /* Progress bar state variable */
@@ -38,8 +40,18 @@ const Questions = () => {
 
     // Sets question to next question
     const setNextQuestion = () => {
-        // Set question index and data to next question
         if (index + 1 < questiondata.length) {
+            
+            // Ensure user selects an answer before proceeding
+            if (!selectedOption) {
+                setShowError(true);
+                return;
+            }
+            else {
+                setShowError(false);
+            }
+
+            // Set question index and data to next question
             setIndex(++index);
             setQuestion(questiondata[index]);
 
@@ -57,7 +69,7 @@ const Questions = () => {
         }
         else {
             // Survey is complete, final update to progress bar
-            // console.log(weaknessAreas.toString()); Uncomment this to see the areas of weakness in console
+            console.log(weaknessAreas.toString());
             setProgress(Math.min(100, (index + 1) * interval));
             
             // Short delay before navigating to show progress bar animation
@@ -93,84 +105,110 @@ const Questions = () => {
 
     return (
         <div>
-            <h1> DEMO v1 </h1>
-            <hr />
-            <h2>{question.question}</h2>
-            <form>
-            <div className="radio-group">
-                {/* Quiz answer options and response handling */}
-                <label 
-                    className={`radio-box ${selectedOption === question.options[0].label ? "selected" : ""}`}
-                    style={{ backgroundColor: "#81b5da" }}>
-                    <input 
-                        type="radio" 
-                        name="answer" 
-                        value={question.options[0].label} 
-                        checked={selectedOption === question.options[0].label}
-                        onChange={() => handleSelection(index, question.options[0].label, question.options[0].score, question.category)}/>
-                    {question.options[0].label}
-                </label>
-
-                <label 
-                    className={`radio-box ${selectedOption === question.options[1].label ? "selected" : ""}`}
-                    style={{ backgroundColor: "#669bc4" }}>
-
-                    <input 
-                        type="radio" 
-                        name="answer" 
-                        value={question.options[1].label} 
-                        checked={selectedOption === question.options[1].label}
-                        onChange={() => handleSelection(index, question.options[1].label, question.options[1].score, question.category)}/>
-                    {question.options[1].label}
-                </label>
-
-                <label 
-                    className={`radio-box ${selectedOption === question.options[2].label ? "selected" : ""}`}
-                    style={{ backgroundColor: "#477caa" }}>
-
-                    <input 
-                        type="radio" 
-                        name="answer" 
-                        value={question.options[2].label} 
-                        checked={selectedOption === question.options[2].label}
-                        onChange={() => handleSelection(index, question.options[2].label, question.options[2].score, question.category)}/>
-                    {question.options[2].label}
-                </label>
-
-                <label 
-                    className={`radio-box ${selectedOption === question.options[3].label ? "selected" : ""}`}
-                    style={{ backgroundColor: "#2b6192" }}>
-
-                    <input 
-                        type="radio" 
-                        name="answer" 
-                        value={question.options[3].label} 
-                        checked={selectedOption === question.options[3].label}
-                        onChange={() => handleSelection(index, question.options[3].label, question.options[3].score, question.category)}/>
-                    {question.options[3].label}
-                </label>
-
-                <label 
-                    className={`radio-box ${selectedOption === question.options[4].label ? "selected" : ""}`}
-                    style={{ backgroundColor: "#0d4379" }}>
-
-                    <input 
-                        type="radio" 
-                        name="answer" 
-                        value={question.options[4].label} 
-                        checked={selectedOption === question.options[4].label}
-                        onChange={() => handleSelection(index, question.options[4].label, question.options[4].score, question.category)}/>
-                    {question.options[4].label}
-                </label>
+            {/* Horizontal bar at the top */}
+            <div className="top-bar">
+                <img src={TeachLogo} style={{height: "80px"}}/>
             </div>
+
+            {/* <h1 style={{ marginTop: "20px" }}> DEMO v1 </h1>
+            <hr /> */}
+
+            {/* Adjust size and position of question text */}
+            <div style={{ maxWidth: "600px", margin: "0 auto", textAlign: "center" }}>
+                <h2 style={{ color: "#595959", fontWeight: "normal", fontSize: "2rem", fontFamily: "'Monserrat', sans-serif" }}>{question.question}</h2>
+            </div>
+
+            {/* Error text if user tries to go to next question without answering current question */}
+            <p style={{ color: "red", fontSize: "20px", textAlign: "center"}}>
+                {showError && "Please select an answer"}
+            </p>
+
+            <form style={{ marginBottom: "30px" }}>
+                <div className="radio-group">
+                    {/* Quiz answer options and response handling */}
+                    <label 
+                        className={`radio-box ${selectedOption === question.options[0].label ? "selected" : ""}`}
+                        style={{ backgroundColor: "#81b5da" }}>
+                        <input 
+                            type="radio" 
+                            name="answer" 
+                            value={question.options[0].label} 
+                            checked={selectedOption === question.options[0].label}
+                            onChange={() => handleSelection(index, question.options[0].label, question.options[0].score, question.category)}/>
+                        {question.options[0].label}
+                    </label>
+
+                    <label 
+                        className={`radio-box ${selectedOption === question.options[1].label ? "selected" : ""}`}
+                        style={{ backgroundColor: "#669bc4" }}>
+
+                        <input 
+                            type="radio" 
+                            name="answer" 
+                            value={question.options[1].label} 
+                            checked={selectedOption === question.options[1].label}
+                            onChange={() => handleSelection(index, question.options[1].label, question.options[1].score, question.category)}/>
+                        {question.options[1].label}
+                    </label>
+
+                    <label 
+                        className={`radio-box ${selectedOption === question.options[2].label ? "selected" : ""}`}
+                        style={{ backgroundColor: "#477caa" }}>
+
+                        <input 
+                            type="radio" 
+                            name="answer" 
+                            value={question.options[2].label} 
+                            checked={selectedOption === question.options[2].label}
+                            onChange={() => handleSelection(index, question.options[2].label, question.options[2].score, question.category)}/>
+                        {question.options[2].label}
+                    </label>
+
+                    <label 
+                        className={`radio-box ${selectedOption === question.options[3].label ? "selected" : ""}`}
+                        style={{ backgroundColor: "#2b6192" }}>
+
+                        <input 
+                            type="radio" 
+                            name="answer" 
+                            value={question.options[3].label} 
+                            checked={selectedOption === question.options[3].label}
+                            onChange={() => handleSelection(index, question.options[3].label, question.options[3].score, question.category)}/>
+                        {question.options[3].label}
+                    </label>
+
+                    <label 
+                        className={`radio-box ${selectedOption === question.options[4].label ? "selected" : ""}`}
+                        style={{ backgroundColor: "#0d4379" }}>
+
+                        <input 
+                            type="radio" 
+                            name="answer" 
+                            value={question.options[4].label} 
+                            checked={selectedOption === question.options[4].label}
+                            onChange={() => handleSelection(index, question.options[4].label, question.options[4].score, question.category)}/>
+                        {question.options[4].label}
+                    </label>
+                </div>
             </form>
 
             {/* Nests progress bar between the Back and Next buttons */}
             <div style={{ display: "flex", alignItems: "center", gap: "10px", width: "100%" }}>
-                <button style={{ backgroundColor: "#062b50", color: "white"}} onClick={setPrevQuestion}>Back</button>
+                {/* Shows back button if not on the first question */}
+                {index > 0 ? (
+                    <button style={{ backgroundColor: "#062b50", color: "white"}} onClick={setPrevQuestion}>
+                        Back
+                    </button>
+                ) : (
+                    <div style={{ width: "80px" }}></div> 
+                )}
+
+                {/* Progress bar */}
                 <div style={{ flexGrow: 1 }}>
                     <ProgressBar bgcolor="#062b50" progress={progress} height={30} />
                 </div>
+
+                {/* Next button */}
                 <button style={{ backgroundColor: "#062b50", color: "white"}} onClick={setNextQuestion}>Next</button>
             </div>
         </div>
