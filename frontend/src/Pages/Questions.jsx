@@ -25,6 +25,9 @@ const Questions = () => {
 
     // Sets question to previous question
     const setPrevQuestion = () => {
+        // Clear any show errors
+        setShowError(false);
+
         // Set question index and data to previous question
         if (index - 1 >= 0) {
             setIndex(--index);
@@ -40,17 +43,17 @@ const Questions = () => {
 
     // Sets question to next question
     const setNextQuestion = () => {
+        // Ensure user selects an answer before proceeding
+        if (!selectedOption) {
+            setShowError(true);
+            return;
+        }
+        else {
+            setShowError(false);
+        }
+        
+        // If there are more questions remaining
         if (index + 1 < questiondata.length) {
-            
-            // Ensure user selects an answer before proceeding
-            if (!selectedOption) {
-                setShowError(true);
-                return;
-            }
-            else {
-                setShowError(false);
-            }
-
             // Set question index and data to next question
             setIndex(++index);
             setQuestion(questiondata[index]);
@@ -61,22 +64,17 @@ const Questions = () => {
             }
             else {
                 setSelectedOption(null);
-            }
-
-            // Update progress bar
-            setProgress(Math.min(100, (index) * interval));
-            
+            }            
         }
         else {
-            // Survey is complete, final update to progress bar
-            console.log(weaknessAreas.toString());
-            setProgress(Math.min(100, (index + 1) * interval));
-            
             // Short delay before navigating to show progress bar animation
             setTimeout(() => {
-                navigate("/Completion");  
+                navigate("/Completion", {state: { weaknessAreas } }); 
               }, 250);
         }
+
+        // Update progress bar
+        setProgress(Math.min(100, (index + 1) * interval));
     };
 
     // Handles the selection of an answer
@@ -194,7 +192,7 @@ const Questions = () => {
 
             {/* Nests progress bar between the Back and Next buttons */}
             <div style={{ display: "flex", alignItems: "center", gap: "10px", width: "100%" }}>
-                {/* Shows back button if not on the first question */}
+                {/* Shows Back button if not on the first question */}
                 {index > 0 ? (
                     <button style={{ backgroundColor: "#062b50", color: "white"}} onClick={setPrevQuestion}>
                         Back
@@ -208,8 +206,12 @@ const Questions = () => {
                     <ProgressBar bgcolor="#062b50" progress={progress} height={30} />
                 </div>
 
-                {/* Next button */}
-                <button style={{ backgroundColor: "#062b50", color: "white"}} onClick={setNextQuestion}>Next</button>
+                {/* Shows Next button if not on the last question */}
+                {index + 1 < questiondata.length ? (
+                   <button style={{ backgroundColor: "#062b50", color: "white"}} onClick={setNextQuestion}>Next</button>
+                ) : (
+                    <button style={{ backgroundColor: "#062b50", color: "white"}} onClick={setNextQuestion}>Finish</button>
+                )}
             </div>
         </div>
     )

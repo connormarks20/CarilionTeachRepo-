@@ -31,7 +31,7 @@ export function Home() {
             Backend Response: {backendMessage}
         </p>
         <hr style={{ margin: "20px 0" }} />
-        <Form />
+        {/* <Form /> */}
         <button onClick={startSurvey}> Start </button>
         </div>
     )
