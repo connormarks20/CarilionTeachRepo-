@@ -3,14 +3,14 @@ import { useLocation } from "react-router-dom";
 
 export function Completion() {
     const location = useLocation();
-    const weaknessAreas = location.state?.weaknessAreas || [];
-    
+    const improvementAreas = location.state?.improvementAreas || [];
+
     return (
         <div>
             <h1>Completion Page</h1>
-            <p>Weakness Areas:</p>
+            <p>Suggested areas of improvement:</p>
             <ul>
-                {weaknessAreas.map((area, index) => (
+                {improvementAreas.map((area, index) => (
                     <li key={index}>{area}</li>
                 ))}
             </ul>

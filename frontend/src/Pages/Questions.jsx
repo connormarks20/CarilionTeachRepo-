@@ -10,7 +10,7 @@ const Questions = () => {
     let [index, setIndex] = useState(0); /* Question index state variable */
     let [question, setQuestion] = useState(questiondata[index]); /* Question data state variable */
     let [answers, setAnswers] = useState([]);  /* Answer data stored in array */
-    const [weaknessAreas, setWeaknessAreas] = useState([]); /* Low scoring answers stored in array */
+    const [improvementAreas, setimprovementAreas] = useState([]); /* Low scoring answers stored in array */
     let [showError, setShowError] = useState(false); /* Shows an error if a user selects 'Next' without choosing an answer */
 
     // Progress bar variables
@@ -69,7 +69,7 @@ const Questions = () => {
         else {
             // Short delay before navigating to show progress bar animation
             setTimeout(() => {
-                navigate("/Completion", {state: { weaknessAreas } }); 
+                navigate("/Completion", {state: { improvementAreas } }); 
               }, 250);
         }
 
@@ -84,7 +84,7 @@ const Questions = () => {
 
         // Add low scoring category to weakness areas
         if (score <= 3) {
-            setWeaknessAreas((prevScores) => {
+            setimprovementAreas((prevScores) => {
                 // Avoid adding duplicates, and only store unique options
                 if (!prevScores.includes(category)) {
                     return [...prevScores, category];
@@ -112,8 +112,8 @@ const Questions = () => {
             <hr /> */}
 
             {/* Adjust size and position of question text */}
-            <div style={{ maxWidth: "600px", margin: "0 auto", textAlign: "center" }}>
-                <h2 style={{ color: "#595959", fontWeight: "normal", fontSize: "2rem", fontFamily: "'Monserrat', sans-serif" }}>{question.question}</h2>
+            <div className="question-container">
+                <h2 className="question-text">{question.question}</h2>
             </div>
 
             {/* Error text if user tries to go to next question without answering current question */}

@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+/* CSS for top bar */
+.home-top-bar {
+    width: 100%;
+    height: 80px;
+    background-color: #03822b;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.top-bar img {
+    height: 680px;
+    width: auto;
+    object-fit: contain;
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+/* Make top bar image scale better on smaller screens */
+@media (max-width: 768px) {
+    .top-bar {
+        height: 60px; /* Slightly smaller for mobile */
+        padding: 0 10px;
+    }
+
+    .top-bar img {
+        height: 50px; /* Reduce logo size */
+        margin-right: 10px;
+    }
+}
+
+/* Black separator line */
+.separator {
+    width: 100%;
+    height: 2px;
+    background-color: black;
+    margin: 20px 0;
+    border: none;
+}
+
+/* Section title */
+.section-title {
+    font-size: 1.8rem;
+    font-family: "Montserrat", sans-serif;
+    margin-bottom: 20px;
+}
+
+.separator-2 {
+    width: 10%;
+    height: 5px;
+    color:#03822b;
+    background-color: #03822b; 
+    margin: 20px 0;
+    border: none;
+}
+
+.accordion-container {
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+    /* background-color: #f0f0f0;  Optional background */
+}
+
+/* Custom accordion styles */
+.custom-accordion {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+/* Green accordion header */
+.custom-accordion-header {
+    background-color: #b9cbb9 !important; 
+    color: white !important;
+    font-weight: bold;
+    padding: 0px;
+    border-radius: 5px;
+    transition: background 0.3s ease-in-out;
+    font-family: "Montserrat", sans-serif;
+}
+
+/* Lighter green accordion body */
+.custom-accordion-body {
+    background-color: #e0ebe0 !important; 
+    color: black;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.accordion-button.collapsed {
+    background-color: #b9cbb9 !important; /* Dark green */
+    color: black !important; /* Set text color to black */
+}
+
+/* Ensure the active (opened) accordion keeps its color */
+.accordion-button:not(.collapsed) {
+    background-color: #b9cbb9 !important;
+    color: black !important; /* Set text color to black */
+}
+
+/* Remove default Bootstrap outline */
+.accordion-button {
+    box-shadow: none !important;
+    border: none !important;
+}
+
+
+
+
+/************* Bottom Elements ******************/
+
+/* Start survey button */
+.start-survey-button {
+    background-color: #235485;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 20px;
+    transition: background 0.3s ease-in-out;
+}
+
+.start-survey-button:hover {
+    background-color: #1a3c60;
+}
+
+/* Outer box */
+.survey-box {
+    width: 350px; /* Adjust width as needed */
+    border-radius: 20px; /* Rounded corners */
+    overflow: hidden; /* Ensures children elements conform to border-radius */
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow */
+}
+
+/* Top half */
+.survey-box-top {
+    background-color: #8cb6d4; /* Light blue */
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 20px;
+}
+
+/* Middle separator */
+.survey-box-divider {
+    background-color: #8eacc1; /* Slightly darker separator */
+    height: 5px;
+}
+
+/* Bottom half */
+.survey-box-bottom {
+    background-color: lightgray; /* Light gray */
+    color: black;
+    padding: 20px;
+}
