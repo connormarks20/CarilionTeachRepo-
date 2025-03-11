@@ -23,13 +23,15 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-
   min-width: 320px;
   min-height: 100vh;
 
-  justify-content: center;  /* center horizontally */
-  align-items: center;  /* center vertically */
+  /*  allows centering of body component
+      removed to allow header to take full page width
+  display: flex;
+  justify-content: center;  center horizontally
+  align-items: center;  center vertically
+  */
 }
 
 h1 {

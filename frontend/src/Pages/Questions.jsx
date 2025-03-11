@@ -191,7 +191,7 @@ const Questions = () => {
             </form>
 
             {/* Nests progress bar between the Back and Next buttons */}
-            <div style={{ display: "flex", alignItems: "center", gap: "10px", width: "100%" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px", width: "100%" }}> {/* TODO: prevent back and next buttons from hitting sides */}
                 {/* Shows Back button if not on the first question */}
                 {index > 0 ? (
                     <button style={{ backgroundColor: "#062b50", color: "white"}} onClick={setPrevQuestion}>

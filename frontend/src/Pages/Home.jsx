@@ -33,36 +33,40 @@ export function Home() {
 
     return (
         <div>
-        <div style={{ textAlign: "center", padding: "20px", fontFamily: "Arial, sans-serif" }}>
             {/* Horizontal bar at the top */}
             <div className="home-top-bar">
                 <img src={TeachLogo} style={{height: "80px"}}/>
             </div>
+            
+            <div style={{ textAlign: "center", padding: "20px", fontFamily: "Arial, sans-serif" }}>
 
-            <h1>Carilion TEACH</h1>
-            <p style={{ fontSize: "18px", fontWeight: "bold" }}>
-                Backend Response: {backendMessage}
-            </p>
+                <h1>Carilion TEACH</h1>
+                <p style={{ fontSize: "18px", fontWeight: "bold" }}>
+                    Backend Response: {backendMessage}
+                </p>
 
-            {/* Black Separator Line */}
-            <hr className="separator" />
+                {/* Black Separator Line */}
+                <hr className="separator" />
 
-            {/* Section Title */}
-            <text className="section-title">About the Resident Educator Topics </text>
+                {/* Section Title */}
+                <text className="section-title">About the Resident Educator Topics</text>
 
-            <hr className="separator-2" />
+                <hr className="separator-2" />
 
-            <Accordion className="custom-accordion">
-            {educatorTopic.map((topic, index) => (
-                <Accordion.Item className="custom-accordion-item" eventKey={index.toString()} key={index} >
-                    <Accordion.Header className="custom-accordion-header">{topic.category}</Accordion.Header>
-                    <Accordion.Body className="custom-accordion-body">{topic.description}</Accordion.Body>
-                </Accordion.Item>
-            ))}
-            </Accordion>
-        </div>
-            {/* Black Separator Line */}
-            <hr className="separator" />
+                <text className="section-description">*Put description for overall categories here*</text>
+
+                <Accordion className="custom-accordion">
+                {educatorTopic.map((topic, index) => (
+                    <Accordion.Item className="custom-accordion-item" eventKey={index.toString()} key={index} >
+                        <Accordion.Header className="custom-accordion-header">{topic.category}</Accordion.Header>
+                        <Accordion.Body className="custom-accordion-body">{topic.description}</Accordion.Body>
+                    </Accordion.Item>
+                ))}
+                </Accordion>
+
+                {/* Black Separator Line */}
+                <hr className="separator"/>
+            </div>
             
             <div className="accordion-container">
                 <div className="survey-box">
@@ -81,6 +85,9 @@ export function Home() {
                     </div>
                 </div>
             </div>
+
+            {/* Black Separator Line */}
+            <hr className="separator"/>
         </div>
     )
 }
