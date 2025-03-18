@@ -105,6 +105,7 @@ const Questions = () => {
         <div>
             {/* Horizontal bar at the top */}
             <div className="top-bar">
+                {/* <p style={{ color: "white", fontSize: "40px", fontWeight: "bold", textAlign: "center"}} >Resident Educator Self-Assessment</p> */}
                 <img src={TeachLogo} style={{height: "80px"}}/>
             </div>
 
