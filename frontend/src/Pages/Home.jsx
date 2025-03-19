@@ -36,7 +36,7 @@ export function Home() {
 
     return (
         <div>
-            <div style={{ textAlign: "center", padding: "20px", fontFamily: "Arial, sans-serif" }}>
+            <div style={{ textAlign: "center", fontFamily: "Arial, sans-serif" }}>
                 {/* Horizontal bar at the top */}
                 <div className="home-top-bar">
                     <img src={TeachLogo} style={{height: "80px"}}/>
@@ -102,9 +102,20 @@ export function Home() {
                 {educatorTopic.map((topic, index) => (
                     <Accordion.Item className="custom-accordion-item" eventKey={index.toString()} key={index} >
                         <Accordion.Header className="custom-accordion-header">{topic.category}</Accordion.Header>
-                        <Accordion.Body className="custom-accordion-body">{topic.description}</Accordion.Body>
-                    </Accordion.Item>
-                ))}
+                        <Accordion.Body className="custom-accordion-body">
+                            {/* Ensure description is an array before mapping, else display description as text */}
+                            {Array.isArray(topic.description) ? (
+                                <ul>
+                                    {topic.description.map((desc, i) => (
+                                        <li key={i}>{desc}</li>
+                                    ))}
+                                </ul>
+                            ) : (
+                                <p>{topic.description}</p>
+                            )}
+                                    </Accordion.Body>
+                                </Accordion.Item>
+                            ))}
                 </Accordion>
             </div>
 

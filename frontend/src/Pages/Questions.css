@@ -87,7 +87,7 @@
     width: auto;
     object-fit: contain;
     margin-left: auto;
-    margin-right: 20px;
+    margin-right: -20px;
 }
 
 /* Make top bar image scale better on smaller screens */
@@ -99,7 +99,7 @@
 
     .top-bar img {
         height: 50px; /* Reduce logo size */
-        margin-right: 10px;
+        margin-right: -20px;
     }
 }
 
