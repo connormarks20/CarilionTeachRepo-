@@ -9,6 +9,9 @@ import TeachLogo from "../assets/teachlogowhite.jpg";
 import TeachCombinedLogos from "../assets/teachcombinedlogos.png"; 
 import TeachLogoNoWords from "../assets/teachlogowithoutwords.png"; 
 import TeachLogoRoot from "../assets/teachlogoroot.png"; 
+import TeachLogoPlantSmall from "../assets/teachlogoplantsmall.png"; 
+import TeachLogoPlantMedium from "../assets/teachlogoplantmedium.png"; 
+import TeachLogoPlantLarge from "../assets/teachlogoplantlarge.png"; 
 import './Home.css';
 import { educatortopicdata } from "../assets/educatortopicdata.js";
 
@@ -71,11 +74,14 @@ export function Home() {
                     </div>
 
                     {/* Overlay Image */}
-                    <img src={TeachLogoRoot} alt="Overlay Image" className="welcome-overlay" />
+                    <img src={TeachLogoPlantSmall} alt="Overlay Image" className="welcome-overlay-plant-small" />
+                    <img src={TeachLogoPlantMedium} alt="Overlay Image" className="welcome-overlay-plant-medium" />
+                    <img src={TeachLogoPlantLarge} alt="Overlay Image" className="welcome-overlay-plant-large" />
+                    <img src={TeachLogoRoot} alt="Overlay Image" className="welcome-overlay-root" />
                 </div>
 
                 {/* Black Separator Line */}
-                <hr className="separator" />
+                <hr className="separator" style={{margin: "40px 0"}} />
                 
                 <div className="section-title-container">
                     <p className="section-title">About the Resident Educator Topics</p>
@@ -120,7 +126,7 @@ export function Home() {
             </div>
 
             {/* Black Separator Line */}
-            <hr className="separator" />
+            <hr className="separator" style={{margin: "40px 0"}} />
             
             {/* */}
             <div className="accordion-container">

@@ -49,7 +49,7 @@
     display: flex;
     position: relative; /* Enables overlay positioning */
     width: 100%;
-    height: 500px; /* Adjust height as needed */
+    height: 700px; /* Adjust height as needed */
 }
 
 /* Left Half (Green Background) */
@@ -69,10 +69,10 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     text-align: left;
     align-items: center;
-    padding: 20px;
+    padding: 200px 20px;
 }
 
 /* Welcome Title */
@@ -99,13 +99,43 @@
 }
 
 /* Overlay Image */
-.welcome-overlay {
+.welcome-overlay-root {
     position: absolute;
-    top: 50%;
+    top: 51%;
     left: 50%;
     transform: translate(-50%, -30%); /* Centers & slightly shifts it */
     height: 77%; /* Adjust for appropriate size */
     width: 100%;
+    z-index: 10; /* Ensures it sits above both sections */
+}
+
+.welcome-overlay-plant-small {
+    position: absolute;
+    top: 93%;
+    left: 55%;
+    transform: translate(-50%, -30%); /* Centers & slightly shifts it */
+    height: 10%; /* Adjust for appropriate size */
+    width: 4%;
+    z-index: 10; /* Ensures it sits above both sections */
+}
+
+.welcome-overlay-plant-medium {
+    position: absolute;
+    top: 86%;
+    left: 67%;
+    transform: translate(-50%, -30%); /* Centers & slightly shifts it */
+    height: 25%; /* Adjust for appropriate size */
+    width: 12.5%;
+    z-index: 10; /* Ensures it sits above both sections */
+}
+
+.welcome-overlay-plant-large {
+    position: absolute;
+    top: 77%;
+    left: 85%;
+    transform: translate(-50%, -30%); /* Centers & slightly shifts it */
+    height: 40%; /* Adjust for appropriate size */
+    width: 17%;
     z-index: 10; /* Ensures it sits above both sections */
 }
 

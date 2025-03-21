@@ -82,6 +82,21 @@
     padding: 0 20px;
 }
 
+.top-bar-title {
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    position: absolute; /* Ensure it's truly centered */
+    left: 50%;
+    transform: translateX(-50%); /* Shift it back by 50% of its width */
+    white-space: normal; /* Allow wrapping */
+    word-wrap: break-word; /* Break long words if necessary */
+    line-height: 1.2;
+    margin: 0;
+    flex-grow: 1; /* Ensure title takes available space */
+    text-align: center;
+}
+
 .top-bar img {
     height: 80px;
     width: auto;
@@ -100,6 +115,19 @@
     .top-bar img {
         height: 50px; /* Reduce logo size */
         margin-right: -20px;
+    }
+
+    .top-bar-title {
+        font-size: 1rem; /* Scale down for smaller screens */
+        max-width: 70%;
+    }
+}
+
+/* Make top bar image scale better on even smaller screens */
+@media (max-width: 480px) {
+    .top-bar-title {
+        font-size: 0.85rem; /* Even smaller font size */
+        max-width: 50%; /* Adjust width further */
     }
 }
 
