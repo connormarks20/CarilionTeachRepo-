@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+.completion-container {
+    background-color: #93b8dc !important;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    min-height: 100vh; /* Ensures the background covers the full screen */
+    display: flex; /* Enables flexbox for centering */
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+}
+
+.content-header {
+    color:#062b50;
+    font-weight: bold;
+    font-size: 2.5rem;
+}
+
+.content-description {
+    color:#0d4379;
+    font-size: 1.5rem;
+}
+
+.content-divider {
+    color:#0d4379;
+    border: 2px solid #0d4379;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.content-box {
+    background-color: white !important;
+    padding: 20px; /* Adds space inside the box */
+    padding-top: 40px;
+    border-radius: 8px; /* Optional: Rounds the corners */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    max-width: 80%; /* Limits the width */
+    margin: 20px auto; /* Centers the box horizontally */
+    margin-top: 6vh;
+    min-height: 85vh;
+    
+    text-align: center;
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: space-between; 
+}
+
+.content-domains {
+    font-size: 1.7rem;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.content-domains-items {
+    font-weight: 400;
+    list-style-type: none;
+}
+
+.content-button {
+    color:white;
+    background-color:#2b6192;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    padding: 20px 40px; /* Increase padding to make it larger */
+    font-size: 30px; /* Increase font size */
+    font-weight: 600;
+    border-radius: 8px;
+    
+    max-width: 40vw;
+    margin: 40px auto;
+    text-align: center;
+}
+
+.content-contact {
+    font-size: 1.3rem;
+}
+
+.content-footer {
+    font-size: 2.2rem;
+    color:#062b50;
+}
+
+@media (max-width: 768px) {
+    .content-header {
+        font-size: 1.5rem;
+    }
+
+    .content-description {
+        font-size: 1rem;
+    }
+
+    .content-domains {
+        font-size: 1.3rem;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .content-domains-items {
+        list-style-type:disc;
+    }
+
+    .content-button {
+        padding: 15px 30px; /* Increase padding to make it larger */
+        font-size: 16px; /* Increase font size */
+        max-width: 100vw;
+    }
+
+    .content-contact {
+        font-size: 1rem;
+    }
+
+    .content-footer {
+       font-size: 1.3rem;
+    }
+}

@@ -159,6 +159,22 @@
     }
 }
 
+.email-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 12rem;
+    padding: 1rem;
+}
+
+.custom-email-input {
+    font-size: 1.5rem; /* Makes text larger */
+    padding: 15px; /* Increases padding for larger field */
+    border: 5px solid #477caa !important; /* Blue outline */
+    border-radius: 8px; /* Optional: smooth corners */
+    width: 100vw; /* Ensures it stretches properly */
+}
 
 /* CSS for radio buttons 
 .radio-group {

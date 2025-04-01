@@ -97,5 +97,10 @@ export const questiondata = [
             { label: "Slightly Confident", score: 2 },
             { label: "Not Confident", score: 1 }
         ]
+    },
+    // Make sure this entry is the final entry in the questions list to capture user email
+    {
+        category: "Email Entry",
+        question: "Enter your email address to receive a report of your responses."
     }
 ]

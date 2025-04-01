@@ -22,19 +22,6 @@
     margin-left: 0%;
 }
 
-/* Make top bar image scale better on smaller screens */
-@media (max-width: 768px) {
-    .home-top-bar {
-        height: 60px; /* Slightly smaller for mobile */
-        padding: 0 10px;
-    }
-
-    .home-top-bar img {
-        height: 50px; /* Reduce logo size */
-        margin-right: 10px;
-    }
-}
-
 /* Black separator line */
 .separator {
     width: 100%;
@@ -137,21 +124,6 @@
     height: 40%; /* Adjust for appropriate size */
     width: 17%;
     z-index: 10; /* Ensures it sits above both sections */
-}
-
-/* Mobile Adjustments */
-@media (max-width: 768px) {
-    .welcome-section {
-        flex-direction: column; /* Stack elements on mobile */
-        height: auto;
-    }
-
-    .welcome-overlay {
-        top: 30%;
-        left: 50%;
-        transform: translate(-50%, -10%);
-        height: 80px;
-    }
 }
 
 /* Title section container with limited width */
@@ -313,4 +285,101 @@
     height: 70px;            /* Set the height of the image */
     width: auto;             /* Maintain the aspect ratio */
     padding-top: 10px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .home-top-bar {
+        height: 60px; /* Slightly smaller for mobile */
+        padding: 0 10px;
+    }
+
+    .home-top-bar img {
+        height: 50px; /* Reduce logo size */
+        margin-right: 10px;
+    }
+
+    .welcome-left,
+    .welcome-right {
+        width: 100%; /* Full width */
+        padding: 30px 15px; /* Adjust padding */
+    }
+
+    /* djust text sizes */
+    .welcome-title {
+        font-size: 2rem; /* Smaller font */
+    }
+
+    .welcome-subtitle {
+        font-size: 1.5rem;
+    }
+
+    .welcome-description {
+        font-size: 1.2rem;
+    }
+
+    /* Adjust Overlay Images */
+    .welcome-overlay-root {
+        top: 68%;
+        height: 50%;
+    }
+
+    .welcome-overlay-plant-small {
+        top: 95%;
+        height: 6%;
+        width: 6%;
+    }
+
+    .welcome-overlay-plant-medium {
+        top: 92%;
+        height: 15%;
+        width: 10%;
+    }
+
+    .welcome-overlay-plant-large {
+        top: 83%;
+        height: 30%;
+        width: 15%;
+    }
+
+    /* Adjust Section Title */
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .section-description {
+        font-size: 1.1rem;
+        padding: 10px;
+    }
+
+    /* Adjust Accordion */
+    .custom-accordion {
+        max-width: 90%; /* Prevents overflow */
+    }
+
+    /* Adjust Button */
+    .start-survey-button {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+    }
+
+    /* Adjust Survey Box */
+    .survey-box {
+        width: 90%;
+    }
+
+    .survey-box-top {
+        font-size: 1.5rem;
+        padding: 15px;
+    }
+
+    .survey-box-bottom {
+        font-size: 1rem;
+        padding: 15px;
+    }
+
+    /* Adjust Bottom Bar */
+    .home-bottom-bar img {
+        height: 50px; /* Smaller */
+    }
 }
