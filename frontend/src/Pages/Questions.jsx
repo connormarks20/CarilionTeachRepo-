@@ -48,39 +48,63 @@ const Questions = () => {
 
     // Sets question to next question
     const setNextQuestion = () => {
-        // Ensure user selects an answer before proceeding
-        if (!selectedOption) {
-            setShowError(true);
-            return;
-        }
-        else {
-            setShowError(false);
-        }
-        
-        // If there are more questions remaining
+        // If we are not on the last question (email page)
         if (index + 1 < questiondata.length) {
-            // Set question index and data to next question
-            setIndex(++index);
-            setQuestion(questiondata[index]);
-
-            // Retrieve old answer if applicable, else set empty selection
-            if (answers[index] != null) {
-                setSelectedOption(answers[index]);
+            if (!selectedOption) {
+                setShowError(true);
+                return;
             }
-            else {
+    
+            setShowError(false);
+            setIndex(index + 1);
+            setQuestion(questiondata[index + 1]);
+    
+            if (answers[index + 1] != null) {
+                setSelectedOption(answers[index + 1]);
+            } else {
                 setSelectedOption(null);
-            }            
+            }
+    
+            setProgress(Math.min(100, (index + 1) * interval));
+        } else {
+            // Last page: validate email and send data
+            console.log("API URL:", import.meta.env.VITE_API_BASE_URL);
+            if (!email || !email.includes("@")) {
+                setShowError(true);
+                return;
+            }
+    
+            setShowError(false);
+    
+            // 🔁 Send the POST request to your backend
+            fetch(`${import.meta.env.VITE_API_BASE_URL}/send-email`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ email, improvementAreas }),
+            })
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Failed to send email");
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    console.log("Email sent:", data.message);
+    
+                    
+                    setTimeout(() => {
+                        navigate("/Completion", { state: { improvementAreas } });
+                    }, 250);
+                })
+                .catch((error) => {
+                    console.error("Error sending email:", error);
+                    alert("There was a problem sending your email. Please try again.");
+                });
         }
-        else {
-            // Short delay before navigating to show progress bar animation
-            setTimeout(() => {
-                navigate("/Completion", {state: { improvementAreas } }); 
-              }, 250);
-        }
-
-        // Update progress bar
-        setProgress(Math.min(100, (index + 1) * interval));
     };
+    
 
     // Handles the selection of an answer
     const handleSelection = (questionIndex, option, score, category) => {
@@ -107,10 +131,8 @@ const Questions = () => {
     }
 
     const updateEmail = (value) => {
-        console.log("value is " + value);
-
-        setSelectedOption(value);
-    }
+        setEmail(value);
+    };
 
     return (
         <div>
