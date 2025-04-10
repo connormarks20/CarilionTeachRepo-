@@ -113,8 +113,8 @@
     }
 
     .top-bar img {
-        height: 50px; /* Reduce logo size */
-        margin-right: -20px;
+        height: 61px !important; /* Reduce logo size */
+        margin-right: -11px;
     }
 
     .top-bar-title {

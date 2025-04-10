@@ -28,7 +28,9 @@ const Questions = () => {
     // Navigation variables
     let navigate = useNavigate(); /* Router navigation variable */
 
-    // Sets question to previous question
+    /**
+     * Sets question to previous question
+     */
     const setPrevQuestion = () => {
         // Clear any show errors
         setShowError(false);
@@ -46,7 +48,11 @@ const Questions = () => {
         setProgress(Math.max(0, (index) * interval));
     };
 
-    // Sets question to next question
+    /**
+     * Sets question to next question
+     * 
+     * @returns 
+     */
     const setNextQuestion = () => {
         // Ensure user selects an answer before proceeding
         if (!selectedOption) {
@@ -72,17 +78,34 @@ const Questions = () => {
             }            
         }
         else {
-            // Short delay before navigating to show progress bar animation
-            setTimeout(() => {
-                navigate("/Completion", {state: { improvementAreas } }); 
-              }, 250);
+            // Ensure email is valid before allowing the form to complete
+            if (validateEmail() == true) {
+                // Email validation successful, clear any errors
+                setShowError(false);
+                
+                // Navigate to completion page
+                setTimeout(() => {
+                    navigate("/Completion", {state: { improvementAreas } }); 
+                  }, 250);
+            }
+            else {
+                // Email validation failed, show error
+                setShowError(true);
+            }
         }
 
         // Update progress bar
         setProgress(Math.min(100, (index + 1) * interval));
     };
 
-    // Handles the selection of an answer
+    /**
+     * Handles the selection of an answer
+     * 
+     * @param {*} questionIndex 
+     * @param {*} option 
+     * @param {*} score 
+     * @param {*} category 
+     */
     const handleSelection = (questionIndex, option, score, category) => {
         // Set current selected option
         setSelectedOption(option);
@@ -106,10 +129,32 @@ const Questions = () => {
         });
     }
 
-    const updateEmail = (value) => {
-        console.log("value is " + value);
+    /**
+     * Updates the input user email
+     * 
+     * @param {*} newEmail 
+     */
+    const updateEmail = (newEmail) => {
+        console.log("value is " + newEmail);
+        // Update stored email
+        setEmail(newEmail);
 
-        setSelectedOption(value);
+        // Store a selected option to prevent error message
+        setSelectedOption(newEmail);
+    }
+
+    /**
+     * 
+     * @returns 
+     */
+    const validateEmail = () => {
+        const re = /\S+@\S+\.\S+/;
+
+        // console.log("email: " + email);
+        // console.log("re value: " + re);
+        // console.log("result value " + re.test(email));
+
+        return re.test(email);
     }
 
     return (
@@ -128,7 +173,7 @@ const Questions = () => {
                 <h2 className="question-text">{question.question}</h2>
             </div>
             
-            {/* If not questionlength - 1, do the below code. If, do input email code*/}
+            {/* If there are more questions, display them */}
             {index !== questiondata.length - 1 ? (
                 <>
                     {/* Error text if user tries to go to next question without answering current question */}
@@ -207,20 +252,23 @@ const Questions = () => {
                 </>
             ) : (
                 <>
+                    {/* End of questions, prompt for email */}
                     <p style={{ color: "red", fontSize: "20px", textAlign: "center"}}>
                             {showError && "Please input a valid email address"}
                     </p>
-
-                    <Form.Group className="email-input" controlId="exampleForm.ControlInput1">
-                        <Form.Control
-                        type="email"
-                        placeholder="Enter your email here"
-                        aria-label="Recipient's username"
-                        aria-describedby="basic-addon2"
-                        className="custom-email-input"
-                        onChange={(e) => updateEmail(e.target.value)}
-                        />
-                    </Form.Group>
+                    
+                    <Form>
+                        <Form.Group className="email-input" controlId="exampleForm.ControlInput1">
+                            <Form.Control
+                            type="email"
+                            placeholder="Enter your email here"
+                            aria-label="Recipient's username"
+                            aria-describedby="basic-addon2"
+                            className="custom-email-input"
+                            onChange={(e) => updateEmail(e.target.value)}
+                            />
+                        </Form.Group>
+                    </Form>
                 </>
             )}
 
@@ -247,6 +295,7 @@ const Questions = () => {
                     <button type="submit" style={{ backgroundColor: "#062b50", color: "white"}} onClick={setNextQuestion}>Finish</button>
                 )}
             </div>
+            
         </div>
     )
 }

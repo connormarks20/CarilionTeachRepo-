@@ -55,7 +55,7 @@ export function Home() {
                     {/* Left Half */}
                     <div className="welcome-left">
                         <h1 className="welcome-title">Welcome</h1>
-                        <h3 className="welcome-subtitle">To TEACH Resident Educator Resources</h3>
+                        <h3 className="welcome-subtitle">To TEACH to Go!</h3>
                     </div>
 
                     {/* Right Half */}
@@ -63,13 +63,20 @@ export function Home() {
                         <hr className="separator-2" />
                         <div className="welcome-description">
                             <p style={{marginBottom: "50px"}}>
-                                This page includes a collection of materials and resources for the various topics
-                                and skills hospital residents will learn and master throughout their residency program.
+                                TEACH to Go is your mobile companion, offering a comprehensive collection of teaching resources tailored
+                                for health professions educators at Carilion Clinic, the Virginia Tech Carilion School of Medicine,
+                                and Radford University Carilion.
                             </p>
 
                             <p>
-                                All resources are organized into their respective topics below to read and learn more about. 
+                                With TEACH to Go, you can:
                             </p>
+
+                            {/* <ul>
+                                <li>Access Educator Resources</li>
+                                <li>Complete a resident educator self-assessment</li>
+                                <li>Stay Informed: Receive updates on upcoming events and educational opportunities</li>
+                            </ul> */}
                         </div>
                     </div>
 
@@ -91,37 +98,66 @@ export function Home() {
                 {/* Section Descriptions */}
                 <div className="section-description">
                     <p> 
-                        As a part of TEACH’s goal to promote and foster a strong community of 
-                        educators and learners at Carilion Clinic, the following topics and resources are 
-                        designed to help build a solid foundation in the various key skills needed as a 
-                        resident educator, enhance teaching abilities, and expand on the subjects to 
-                        foster a deeper understanding of the materials.
+                        As an extension of the Teaching Excellence Academy for Collaborative Healthcare (TEACH),
+                        our mission is to promote learning excellence by creating a community of educators
+                        and fostering their development as teachers, learners, and education scholars. 
                     </p>
 
                     <p>
-                        The following resources cover multiple topics. To learn more about a specific 
+                        The following resources will link to external sites. To learn more about a specific 
                         subject, click on the arrow to expand the menu.
                     </p>
                 </div>
                 
                 <Accordion className="custom-accordion">
                 {educatorTopic.map((topic, index) => (
-                    <Accordion.Item className="custom-accordion-item" eventKey={index.toString()} key={index} >
-                        <Accordion.Header className="custom-accordion-header">{topic.category}</Accordion.Header>
-                        <Accordion.Body className="custom-accordion-body">
-                            {/* Ensure description is an array before mapping, else display description as text */}
-                            {Array.isArray(topic.description) ? (
+                    <Accordion.Item className="custom-accordion-item" eventKey={index.toString()} key={index}>
+                    <Accordion.Header className="custom-accordion-header">{topic.category}</Accordion.Header>
+                    <Accordion.Body className="custom-accordion-body">
+                        {/* Ensure description is an array before mapping */}
+                        {Array.isArray(topic.description) ? (
+                        <ul>
+                            {topic.description.map((desc, i) => {
+                            // Handle direct resources
+                            if (desc.title) {
+                                return (
+                                <li key={i} style={{ marginBottom: "1rem" }}>
+                                    <a href={desc.url} target="_blank" rel="noopener noreferrer">
+                                    {desc.title}
+                                    </a>
+                                    {desc.source && <> — <em>{desc.source}</em></>}
+                                    {desc.type === "video" && <span> 🎥</span>}
+                                    {desc.type === "article" && <span> 📄</span>}
+                                </li>
+                                );
+                            }
+
+                            // Handle nested structure with subcategory + details
+                            return (
+                                <li key={i} style={{ marginBottom: "1rem" }}>
+                                <strong>{desc.subcategory}</strong>
                                 <ul>
-                                    {topic.description.map((desc, i) => (
-                                        <li key={i}>{desc}</li>
+                                    {desc.details.map((detail, j) => (
+                                    <li key={j} style={{ marginBottom: "1rem" }}>
+                                        <a href={detail.url} target="_blank" rel="noopener noreferrer">
+                                        {detail.title}
+                                        </a>
+                                        {detail.source && <> — <em>{detail.source}</em></>}
+                                        {detail.type === "video" && <span> 🎥</span>}
+                                        {detail.type === "article" && <span> 📄</span>}
+                                    </li>
                                     ))}
                                 </ul>
-                            ) : (
-                                <p>{topic.description}</p>
-                            )}
-                                    </Accordion.Body>
-                                </Accordion.Item>
-                            ))}
+                                </li>
+                            );
+                            })}
+                        </ul>
+                        ) : (
+                        <p>{topic.description}</p>
+                        )}
+                    </Accordion.Body>
+                    </Accordion.Item>
+                ))}
                 </Accordion>
             </div>
 

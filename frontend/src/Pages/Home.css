@@ -291,12 +291,10 @@
 @media (max-width: 768px) {
     .home-top-bar {
         height: 60px; /* Slightly smaller for mobile */
-        padding: 0 10px;
     }
 
     .home-top-bar img {
-        height: 50px; /* Reduce logo size */
-        margin-right: 10px;
+        height: 61px !important; /* Reduce logo size */
     }
 
     .welcome-left,

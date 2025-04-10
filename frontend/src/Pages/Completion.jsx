@@ -5,6 +5,7 @@ import './Completion.css';
 
 export function Completion() {
     const location = useLocation();
+    let navigate = useNavigate();
     const improvementAreas = location.state?.improvementAreas || [];
 
     return (
@@ -44,12 +45,12 @@ export function Completion() {
                 </div>
 
                 {/*  */}
-                <button className="content-button">Learn More about these Topics</button>
+                <button className="content-button" onClick={() => navigate("/")}>Learn More about these Topics</button>
                 
                 {/* */}
                 <p className="content-contact">
                     If you have any questions or would like to further discuss your self-assessment results,
-                    please contact Mariah Rudd, mjrudd@carilionclinic.org
+                    please contact Mariah Rudd, <a href="mailto:mjrudd@carilionclinic.org" target="_blank">mjrudd@carilionclinic.org</a>
                 </p>
 
                 <p className="content-footer">
