@@ -3,6 +3,7 @@ import Form from "../Components/Form.jsx";
 import ProgressBar from "../Components/ProgressBar.jsx";
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router";
+import { useSearchParams } from "react-router";
 import Questions from "./Questions.jsx";
 import Accordion from 'react-bootstrap/Accordion';
 import TeachLogo from "../assets/teachlogowhite.jpg";  
@@ -14,14 +15,26 @@ import TeachLogoPlantMedium from "../assets/teachlogoplantmedium.png";
 import TeachLogoPlantLarge from "../assets/teachlogoplantlarge.png"; 
 import './Home.css';
 import { educatortopicdata } from "../assets/educatortopicdata.js";
+import React from "react";
 
 export function Home() {
     const [backendMessage, setBackendMessage] = useState("Loading...");
-    const [progress, setProgress] = useState(0); /* Progress bar variable */
     let navigate = useNavigate(); /* Router navigation variable */
 
-    //
+    // Accordion variables
     let [educatorTopic, setEducatorTopic] = useState(educatortopicdata);
+    let accordionRef = React.createRef();
+    
+    // Resources variables
+    const [searchParams] = useSearchParams();
+    const defaultKeys = searchParams.get("resources")?.split(",") || [];
+
+    // If navigating to resources, scrolls to accordion
+    useEffect(() => {
+        if (defaultKeys.length > 0) {
+            accordionRef.current.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        }
+      }, []);
 
     // Gets data from backend when the component mounts 
     useEffect(() => {
@@ -32,7 +45,7 @@ export function Home() {
         .catch(() => setBackendMessage("Could not connect to backend"));
     }, []);
 
-    // Increases progress on progress bar and navigates to next page
+    // Navigates to survey page
     const startSurvey = () => {
         navigate("/Questions");         
     };
@@ -71,12 +84,11 @@ export function Home() {
                             <p>
                                 With TEACH to Go, you can:
                             </p>
-
-                            {/* <ul>
+                            <ul>
                                 <li>Access Educator Resources</li>
                                 <li>Complete a resident educator self-assessment</li>
                                 <li>Stay Informed: Receive updates on upcoming events and educational opportunities</li>
-                            </ul> */}
+                            </ul>
                         </div>
                     </div>
 
@@ -109,7 +121,7 @@ export function Home() {
                     </p>
                 </div>
                 
-                <Accordion className="custom-accordion">
+                <Accordion className="custom-accordion" ref={accordionRef} defaultActiveKey={defaultKeys} alwaysOpen>
                 {educatorTopic.map((topic, index) => (
                     <Accordion.Item className="custom-accordion-item" eventKey={index.toString()} key={index}>
                     <Accordion.Header className="custom-accordion-header">{topic.category}</Accordion.Header>

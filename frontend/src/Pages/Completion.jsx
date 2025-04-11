@@ -2,11 +2,33 @@ import { useNavigate } from "react-router";
 import { useLocation } from "react-router-dom";
 import TeachLogo from "../assets/teachlogowhite.jpg";  
 import './Completion.css';
+import { educatortopicdata } from "../assets/educatortopicdata.js";
+import { useState } from "react";
 
 export function Completion() {
     const location = useLocation();
     let navigate = useNavigate();
     const improvementAreas = location.state?.improvementAreas || [];
+
+    // Maps areas for improvement to accordion indices
+    const mapAreasToAccordionIndices = (areas) => {
+        console.log("Lower cased areas " + areas);
+        
+        return educatortopicdata
+          .map((topic, index) =>
+            areas.includes(topic.category) ? index : null
+            // console.log("Categories " + topic.category)
+          )
+        .filter((i) => i !== null);
+    };
+      
+    // Navigates to home, displaying the relevant resources based on assessment results
+    const navigateHomeWithResources = () => {
+        const matchedIndices = mapAreasToAccordionIndices(improvementAreas);
+        // console.log("matched indices " + matchedIndices);
+        const url = `/?resources=${matchedIndices.join(",")}`;
+        navigate(url);
+    }
 
     return (
         <div className="completion-container">
@@ -45,7 +67,7 @@ export function Completion() {
                 </div>
 
                 {/*  */}
-                <button className="content-button" onClick={() => navigate("/")}>Learn More about these Topics</button>
+                <button className="content-button" onClick={() => navigateHomeWithResources()}>Learn More about these Topics</button>
                 
                 {/* */}
                 <p className="content-contact">
