@@ -73,7 +73,14 @@ export function Home() {
 
                     {/* Right Half */}
                     <div className="welcome-right">
-                        <hr className="separator-2" />
+                        <div className="welcome-right-teach-header">
+                            <p style={{ margin: 0, padding: 0, lineHeight: 1.5 }}>TEACH To-Go</p>
+                        </div>
+
+                        <div style={{ width: "100%", textAlign: "left" }}>
+                            <hr className="separator-2" style={{ width: "50%", margin: "5px 0 10px 0" }} />
+                        </div>
+
                         <div className="welcome-description">
                             <p style={{marginBottom: "50px"}}>
                                 TEACH to Go is your mobile companion, offering a comprehensive collection of teaching resources tailored

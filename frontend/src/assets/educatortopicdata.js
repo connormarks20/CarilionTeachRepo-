@@ -21,8 +21,14 @@ export const educatortopicdata = [
             },
             {
                 title: "Medical Professionalism in the Modern Era",
-                url: "https://www.youtube.com/watch?v=Q1yqXr5W3w4",
-                source: "the New England Journal of Medicine",
+                url: "https://www.alphaomegaalpha.org/wp-content/uploads/2021/03/2018-1-Byyny.pdf",
+                source: "Richard L. Byyny, MD, FACP",
+                type: "article"
+            },
+            {
+                title: "Why Does Professionalism Matter?",
+                url: "https://www.youtube.com/watch?v=2PIplMOIINg",
+                source: "ABIM Foundation",
                 type: "video"
             }
         ]
@@ -34,9 +40,9 @@ export const educatortopicdata = [
                 subcategory: "Feedback",
                 details: [
                     {
-                        title: "Giving Feedback in Clinical Settings",
-                        url: "https://www.youtube.com/watch?v=1X_xlJ8xK1A",
-                        source: "the University of California, San Francisco (UCSF). This video demonstrates the Ask-Tell-Ask model for providing feedback",
+                        title: "DOM Feedback Series - Intro and Verbal Feedback",
+                        url: "https://media.ucsf.edu/playlist/dedicated/1_kgcqc78h/1_edcllwfl",
+                        source: "Joey Bernal",
                         type: "video"
                     },
                     {
@@ -49,6 +55,12 @@ export const educatortopicdata = [
                         title: "12 tips for feedback in clinical environment",
                         url: "https://deptmedicine.arizona.edu/sites/default/files/12_tips_fback_clinical_setting.pdf",
                         type: "article"
+                    },
+                    {
+                        title: "Feedback in the clinical setting",
+                        url: "https://bmcmededuc.biomedcentral.com/articles/10.1186/s12909-020-02280-5",
+                        source: "BMC Medical Education",
+                        type: "article"
                     }
                 ]
             },
@@ -59,6 +71,12 @@ export const educatortopicdata = [
                         title: "Pendleton's Rules for Feedback",
                         url: "https://biomedgrid.com/pdf/AJBSR.MS.ID.002542.pdf",
                         type: "article"
+                    },
+                    {
+                        title: "Giving Effective Feedback - ASK-TELL-ASK Method",
+                        url: "https://www.youtube.com/watch?v=sEIvZRwaK7s",
+                        source: "CU Academy of Medical Educators",
+                        type: "video"
                     }
                 ]
             },
@@ -141,9 +159,14 @@ export const educatortopicdata = [
                         type: "article"
                     },
                     {
-                        title: "The One-Minute Preceptor: Five Microskills for Clinical Teaching",
-                        url: "https://www.youtube.com/watch?v=E9z3I7Vj7eo",
-                        source: "the University of Washington",
+                        title: "The Five Microskills for Clinical Teaching AKA: One Minute Preceptor ",
+                        url: "https://www.oliveviewim.org/wp-content/uploads/2023/05/1-min-preceptor-handout-1-1.pdf",
+                        type: "article"
+                    },
+                    {
+                        title: "LEGO Surgery: One Minute Preceptor",
+                        url: "https://www.youtube.com/watch?v=k1owPOJ1e1k",
+                        source: "Surgery 101",
                         type: "video"
                     }
                 ]
@@ -197,9 +220,27 @@ export const educatortopicdata = [
                 type: "article"
             },
             {
-                title: "Effective Bedside Teaching",
-                url: "https://www.youtube.com/watch?v=Vf6u6y8Y5iE",
-                source: "Stanford Medicine",
+                title: "Why is Bedside Manner Important?",
+                url: "https://in-training.org/why-is-bedside-manner-important-16124",
+                source: "Anna Morrow at Purdue University",
+                type: "article"
+            },
+            {
+                title: "Quick Teaching Tip: Bedside Teaching",
+                url: "https://www.youtube.com/watch?v=iiqB-eQcbT8",
+                source: "Virginia Apgar Academy of Medical Educators",
+                type: "video"
+            },
+            {
+                title: "Keys to Bedside Teaching",
+                url: "https://www.youtube.com/watch?v=UeYvLNvYMKM",
+                source: "usfhealth",
+                type: "video"
+            },
+            {
+                title: "The Bedside 5 Minute Moment (How We Teach the Bedside Physical Exam)",
+                url: "https://www.youtube.com/watch?v=UMK5NWfCpKk",
+                source: "Stanford Medicine 25",
                 type: "video"
             }
         ]
@@ -236,10 +277,16 @@ export const educatortopicdata = [
                         type: "article"
                     },
                     {
-                        title: "The Socratic Method in Medicine",
-                        url: "https://www.youtube.com/watch?v=2ztt5FKh2DY",
-                        source: "the University of Chicago Medicine",
+                        title: "Socratic Questioning Strategies as Taught by Beck Institute",
+                        url: "https://www.youtube.com/watch?v=DvfH5FNzC9k",
+                        source: "Beck Institute for Cognitive Behavior Therapy",
                         type: "video"
+                    },
+                    {
+                        title: "Advantages of the Socratic method for medical teaching",
+                        url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC8565974/",
+                        source: "PMC",
+                        type: "article"
                     }
                 ] 
             },
@@ -273,10 +320,22 @@ export const educatortopicdata = [
                         type: "article"
                     },
                     {
-                        title: "Psychological Safety: A Foundation for Teamwork and Learning in Health Care",
+                        title: "Building a psychologically safe workplace",
                         url: "https://www.youtube.com/watch?v=LhoLuui9gX8",
-                        source: "the Institute for Healthcare Improvement (IHI)",
+                        source: "Amy Edmondson",
                         type: "video"
+                    },
+                    {
+                        title: "Simon Sinek's Guide to Cultivating Psychological Safety at Work",
+                        url: "https://www.youtube.com/watch?v=IV8wCxgj5p4",
+                        source: "Simon Sinek",
+                        type: "video"
+                    },
+                    {
+                        title: "Psychological safety in medical education: A scoping review and synthesis of the literature",
+                        url: "https://pubmed.ncbi.nlm.nih.gov/37266963/",
+                        source: "PubMed",
+                        type: "article"
                     }
                 ]
             }
@@ -306,12 +365,6 @@ export const educatortopicdata = [
                 subcategory: "Presentation Skills",
                 details: [
                     {
-                        title: "Effective Presentation Skills for Medical Educators",
-                        url: "https://www.youtube.com/watch?v=1ZbJmWHJATs",
-                        source: "the University of Texas Health Science Center. This video offers guidance on improving presentation skills",
-                        type: "video"
-                    },
-                    {
                         title: "5 keys to help medical students sharpen their presentations",
                         url: "https://www.ama-assn.org/medical-students/medical-school-life/5-keys-help-medical-students-sharpen-their-presentations",
                         type: "article"
@@ -324,6 +377,18 @@ export const educatortopicdata = [
                     {   
                         title: "Tips on How To Create Captivating Medical Presentations",
                         url: "https://prezentium.com/how-to-make-an-engaging-medical-presentation/#:~:text=Leveraging%20Visual%20Elements,opposed%20to%20a%20descriptive%20narration",
+                        type: "article"
+                    },
+                    {
+                        title: "Presentation Skills Toolkit for Medical Students",
+                        url: "https://students-residents.aamc.org/attending-medical-school/presentation-skills-toolkit-medical-students",
+                        source: "AAMC",
+                        type: "article"
+                    },
+                    {
+                        title: "Effective lecture presentation skills",
+                        url: "https://www.sciencedirect.com/science/article/abs/pii/S0090301996003448",
+                        source: "ScienceDirect",
                         type: "article"
                     }
                 ]
@@ -348,7 +413,28 @@ export const educatortopicdata = [
                 subcategory: "Teaching across different learner levels",
                 details: [
                     {
-
+                        title: "Sharing the Light: Teaching Different Levels of Learners",
+                        url: "https://www.mededportal.org/doi/10.15766/mep_2374-8265.10388",
+                        source: "MedEdPortal",
+                        type: "article"
+                    },
+                    {
+                        title: "What to Expect from Different Levels of Learners",
+                        url: "https://med.unr.edu/cme/cmeonlinelibrary/what-to-expect-from-different-levels-of-learners",
+                        source: "University of Nevada, Reno School of Medicine",
+                        type: "article"
+                    },
+                    {
+                        title: "Deeper Teaching: from Theory and Practice to Learner-Centered Medical Education",
+                        url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC9849626/",
+                        source: "PMC",
+                        type: "article"
+                    },
+                    {
+                        title: "Lessons From Learners: Adapting Medical Student Education During and Post COVID-19",
+                        url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC8603439/",
+                        source: "PMC",
+                        type: "article"
                     }
                 ]
             },
@@ -356,7 +442,22 @@ export const educatortopicdata = [
                 subcategory: "Assessing Learner Needs",
                 details: [
                     {
-
+                        title: "How to assess your learning needs",
+                        url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC1325078/",
+                        source: "PMC",
+                        type: "article"
+                    },
+                    {
+                        title: "METHODS OF ASSESSING LEARNING NEEDS",
+                        url: "https://www.cpd.utoronto.ca/quicktips-docs/05-Assessing-Learning-Needs.pdf",
+                        source: "Temerty Faculty of Medicine, University of Toronto",
+                        type: "article"
+                    },
+                    {
+                        title: "Precision education and the future of medical education",
+                        url: "https://www.ama-assn.org/education/changemeded-initiative/precision-education-and-future-medical-education",
+                        source: "AMA",
+                        type: "article"
                     }
                 ]
             },

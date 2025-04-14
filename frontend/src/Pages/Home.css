@@ -36,7 +36,7 @@
     display: flex;
     position: relative; /* Enables overlay positioning */
     width: 100%;
-    height: 700px; /* Adjust height as needed */
+    height: 750px; /* Adjust height as needed */
 }
 
 /* Left Half (Green Background) */
@@ -54,7 +54,7 @@
 .welcome-right {
     background-color: white;
     flex: 1;
-    display: flex;
+    display: block;
     flex-direction: column;
     justify-content: flex-start;
     text-align: left;
@@ -78,6 +78,14 @@
     font-weight: normal;
     margin-top: 5px;
     font-family: "Roboto", sans-serif;
+}
+
+.welcome-right-teach-header {
+    text-align: left;
+    font-size: 2rem;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    color:#03822b;
 }
 
 .welcome-description {
@@ -298,10 +306,14 @@
         height: 61px !important; /* Reduce logo size */
     }
 
+    .welcome-section {
+        height: 650px;
+    }
+
     .welcome-left,
     .welcome-right {
         width: 100%; /* Full width */
-        padding: 30px 15px; /* Adjust padding */
+        padding: 60px 15px; /* Adjust padding */
     }
 
     /* djust text sizes */
@@ -311,6 +323,10 @@
 
     .welcome-subtitle {
         font-size: 1.5rem;
+    }
+
+    .welcome-right-teach-header {
+        font-size: 1rem;
     }
 
     .welcome-description {
@@ -324,21 +340,22 @@
     }
 
     .welcome-overlay-plant-small {
-        top: 95%;
-        height: 6%;
+        top: 97%;
+        height: 4%;
         width: 6%;
     }
 
     .welcome-overlay-plant-medium {
-        top: 92%;
-        height: 15%;
-        width: 10%;
+        top: 94%;
+        height: 10%;
+        width: 20%;
     }
 
     .welcome-overlay-plant-large {
-        top: 83%;
-        height: 30%;
-        width: 15%;
+        top: 89%;
+        height: 20%;
+        width: 25%;
+        left: 87%;
     }
 
     /* Adjust Section Title */
@@ -348,7 +365,7 @@
 
     .section-description {
         font-size: 1.1rem;
-        padding: 10px;
+        padding: 20px;
     }
 
     /* Adjust Accordion */
