@@ -9,7 +9,7 @@
 /* Responsive question text */
 .question-text {
     color: #595959;
-    font-weight: normal;
+    font-weight: 500;
     font-size: clamp(1.2rem, 3vw, 2rem); /* Responsive text */
     font-family: "Montserrat", sans-serif;
     line-height: 1.4;
@@ -71,7 +71,7 @@
 .top-bar {
     width: 100%;
     height: 80px;
-    background-color: #81b5da;
+    background-color: #0d4379;
     position: fixed;
     top: 0;
     left: 0;
@@ -141,7 +141,7 @@
 
 .question-text {
     color: #595959;
-    font-weight: normal;
+    font-weight: 500;
     font-size: clamp(1.2rem, 2.5vw, 2rem); /* Scales better */
     font-family: "Montserrat", sans-serif;
     line-height: 1.4;
@@ -156,6 +156,7 @@
 
     .question-text {
         font-size: 1.4rem; /* Adjust for better readability */
+        font-weight: 500;
     }
 }
 

@@ -15,8 +15,9 @@ const Questions = () => {
     const [improvementAreas, setimprovementAreas] = useState([]); /* Low scoring answers stored in array */
     let [showError, setShowError] = useState(false); /* Shows an error if a user selects 'Next' without choosing an answer */
     
-    // Email variable
+    // Email variables
     let [email, setEmail] = useState("");
+    const emailInputRef = useRef(null);
 
     // Progress bar variables
     const [progress, setProgress] = useState(0); /* Progress bar state variable */
@@ -143,6 +144,15 @@ const Questions = () => {
         setSelectedOption(newEmail);
     }
 
+    // const handleSubmit = (event) => {
+    //     event.preventDefault();
+    //     console.log("event target" + event.target);
+    //     console.log("event array target " + event.target[0]);
+    //     if (emailInputRef.current) {
+    //         emailInputRef.current.blur();
+    //       }
+    // }
+
     /**
      * 
      * @returns 
@@ -186,7 +196,7 @@ const Questions = () => {
                             {/* Quiz answer options and response handling */}
                             <label 
                                 className={`radio-box ${selectedOption === question.options[0].label ? "selected" : ""}`}
-                                style={{ backgroundColor: "#81b5da" }}>
+                                style={{ backgroundColor: "#0d4379" }}>
                                 <input 
                                     type="radio" 
                                     name="answer" 
@@ -198,7 +208,7 @@ const Questions = () => {
 
                             <label 
                                 className={`radio-box ${selectedOption === question.options[1].label ? "selected" : ""}`}
-                                style={{ backgroundColor: "#669bc4" }}>
+                                style={{ backgroundColor: "#2b6192" }}>
 
                                 <input 
                                     type="radio" 
@@ -224,7 +234,7 @@ const Questions = () => {
 
                             <label 
                                 className={`radio-box ${selectedOption === question.options[3].label ? "selected" : ""}`}
-                                style={{ backgroundColor: "#2b6192" }}>
+                                style={{ backgroundColor: "#669bc4" }}>
 
                                 <input 
                                     type="radio" 
@@ -237,7 +247,7 @@ const Questions = () => {
 
                             <label 
                                 className={`radio-box ${selectedOption === question.options[4].label ? "selected" : ""}`}
-                                style={{ backgroundColor: "#0d4379" }}>
+                                style={{ backgroundColor: "#81b5da" }}>
 
                                 <input 
                                     type="radio" 
@@ -260,12 +270,20 @@ const Questions = () => {
                     <Form>
                         <Form.Group className="email-input" controlId="exampleForm.ControlInput1">
                             <Form.Control
+                            ref={emailInputRef}
                             type="email"
                             placeholder="Enter your email here"
                             aria-label="Recipient's username"
                             aria-describedby="basic-addon2"
                             className="custom-email-input"
                             onChange={(e) => updateEmail(e.target.value)}
+                            onKeyDown={(event) => {
+                                // Prevent page refresh and close input field when enter is pressed
+                                if (event.key === "Enter") {
+                                  event.preventDefault();
+                                  emailInputRef.current.blur(); 
+                                }
+                              }}
                             />
                         </Form.Group>
                     </Form>

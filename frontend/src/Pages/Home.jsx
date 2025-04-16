@@ -110,7 +110,7 @@ export function Home() {
                 <hr className="separator" style={{margin: "40px 0"}} />
                 
                 <div className="section-title-container">
-                    <p className="section-title">About the Resident Educator Topics</p>
+                    <p className="section-title">About the Health Professions Educator Topics</p>
                     <hr className="separator-2" />
                 </div>
 

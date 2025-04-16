@@ -136,11 +136,6 @@ export const educatortopicdata = [
                         title: "Workplace-Based Assessment as an Educational Tool: Guide Supplement 31.2 – Viewpoint",
                         url: "https://pubmed.ncbi.nlm.nih.gov/18158655/#:~:text=Aims:%20To%20review%20some%20of,enhance%20their%20participation%20and%20training",
                         type: "article"
-                    },
-                    {
-                        title: "https://pubmed.ncbi.nlm.nih.gov/18158655/",
-                        url: "https://pubmed.ncbi.nlm.nih.gov/18158655/",
-                        type: "article"
                     }
                 ]
             }
