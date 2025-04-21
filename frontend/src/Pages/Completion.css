@@ -56,6 +56,11 @@
     list-style-type: none;
 }
 
+.no-improvements-text {
+    font-size: 1.7rem;
+    color:#062b50;
+}
+
 .content-button {
     color:white;
     background-color:#2b6192;
@@ -97,6 +102,10 @@
 
     .content-domains-items {
         list-style-type:disc;
+    }
+
+    .no-improvements-text {
+        font-size: 0.8rem;
     }
 
     .content-button {

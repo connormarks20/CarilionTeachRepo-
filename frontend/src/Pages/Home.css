@@ -261,7 +261,7 @@
 
 /* Top half */
 .survey-box-top {
-    background-color: #8cb6d4; /* Light blue */
+    background-color: #235485; /* Light blue */
     color: white;
     font-size: 2.1rem;
     font-weight: bold;
@@ -298,6 +298,43 @@
     padding-top: 10px;
 }
 
+@media (max-height: 882px) {
+    .welcome-section {
+        height: 110vh;
+    }
+}
+
+@media (max-height: 844px) {
+    .welcome-section {
+        height: 100vh;
+    }
+}
+
+@media (max-height: 800px) {
+    .welcome-section {
+        height: 120vh;
+    }
+}
+
+/* Adjust height for smaller screens */
+@media (max-height: 500px) {
+    .welcome-section {
+        height: 140vh;
+    }
+}
+
+@media (min-height: 1024px) {
+    .welcome-section {
+        height: 30vh;
+    }
+}
+
+@media (min-height: 1180px) {
+    .welcome-section {
+        height: 90vh;
+    }
+}
+
 /* Mobile adjustments */
 @media (max-width: 768px) {
     .home-top-bar {
@@ -309,7 +346,8 @@
     }
 
     .welcome-section {
-        height: 1000px; /* TODO: FIX */
+        /* height: 1000px; */
+        min-height: 700px;
     }
 
     .welcome-left,

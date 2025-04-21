@@ -59,11 +59,26 @@ export function Completion() {
                         Review the following teaching domains with associated resources linked to your areas
                         of improvement:
                     </p>
-                    <ul className="content-domains-items">
-                        {improvementAreas.map((area, index) => (
-                            <li key={index}>{area}</li>
-                        ))}
-                    </ul>
+                    {improvementAreas.length > 1 ? (
+                    <>
+                        <ul className="content-domains-items">
+                            {/* If improvement areas */}
+                            
+                                {improvementAreas.map((area, index) => (
+                                    <li key={index}>{area}</li>
+                                ))}
+                        </ul>
+                    </>
+                    ) : (
+                        <p className="no-improvements-text">
+                            You have identified confidence across all areas of teaching! Recognizing your strengths
+                            is an important step in professional growth. While no immediate areas for development
+                            were identified, continued reflection and feedback from peers and learners can offer
+                            new insights as your teaching environment evolves. We encourage you to remain open to
+                            learning opportunities and consider mentoring others or exploring advanced faculty development
+                            topics to further enhance your impact as an educator.
+                        </p>
+                    )}
                 </div>
 
                 {/*  */}

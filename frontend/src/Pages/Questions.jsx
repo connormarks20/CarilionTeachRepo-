@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { questiondata } from "../assets/questiondata.js";
+import { programData } from "../assets/questiondata.js";
 import ProgressBar from "../Components/ProgressBar.jsx";
 import { useNavigate } from "react-router";
 import './Questions.css';
@@ -8,13 +9,19 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 
 const Questions = () => {
-    // Question/answer variables
+    // Self assessment question/answer variables
     let [index, setIndex] = useState(0); /* Question index state variable */
     let [question, setQuestion] = useState(questiondata[index]); /* Question data state variable */
     let [answers, setAnswers] = useState([]);  /* Answer data stored in array */
     const [improvementAreas, setimprovementAreas] = useState([]); /* Low scoring answers stored in array */
     let [showError, setShowError] = useState(false); /* Shows an error if a user selects 'Next' without choosing an answer */
     
+    // Resident educator information variables
+    let [program, setProgram] = useState("");
+    let [pgy, setPgy] = useState("");
+    let [numStudents, setNumStudents] = useState("");
+    let [formalEducation, setFormalEducation] = useState("");
+
     // Email variables
     let [email, setEmail] = useState("");
     const emailInputRef = useRef(null);
@@ -57,8 +64,11 @@ const Questions = () => {
     const setNextQuestion = () => {
         // Ensure user selects an answer before proceeding
         if (!selectedOption) {
-            setShowError(true);
-            return;
+            // Extra case for resident educator information validation
+            if (program === "" || pgy === "" || numStudents === "" || formalEducation === "") {
+                setShowError(true);
+                return;
+            }
         }
         else {
             setShowError(false);
@@ -77,6 +87,9 @@ const Questions = () => {
             else {
                 setSelectedOption(null);
             }            
+
+            // Clear any errors
+            setShowError(false);
         }
         else {
             // Ensure email is valid before allowing the form to complete
@@ -128,6 +141,42 @@ const Questions = () => {
             newAnswers[questionIndex] = option;
             return newAnswers;
         });
+    }
+
+    /**
+     * 
+     * @param {*} newProgram 
+     */
+    const updateProgram = (newProgram) => {
+        setProgram(newProgram);
+        console.log("new program " + newProgram);
+    }
+
+    /**
+     * 
+     * @param {*} newPgy 
+     */
+    const updatePgy = (newPgy) => {
+        setPgy(newPgy);
+        console.log("new pgy " + newPgy);
+    }
+
+    /**
+     * 
+     * @param {*} newNumStudents 
+     */
+    const updateNumStudents = (newNumStudents) => {
+        setNumStudents(newNumStudents);
+        console.log("new num students " + newNumStudents);
+    }
+
+    /**
+     * 
+     * @param {*} newFormalEducation 
+     */
+    const updateFormalEducation = (newFormalEducation) => {
+        setFormalEducation(newFormalEducation);
+        console.log("new formal education" + newFormalEducation);
     }
 
     /**
@@ -184,7 +233,7 @@ const Questions = () => {
             </div>
             
             {/* If there are more questions, display them */}
-            {index !== questiondata.length - 1 ? (
+            {index < questiondata.length - 2 ? (
                 <>
                     {/* Error text if user tries to go to next question without answering current question */}
                     <p style={{ color: "red", fontSize: "20px", textAlign: "center"}}>
@@ -260,6 +309,76 @@ const Questions = () => {
                         </div>
                     </form>
                 </>
+            ) : index == questiondata.length - 2 ? (
+                <>  
+                    {/* Elements for resident educator information */}
+
+                    {/* Error text */}
+                    <p style={{ color: "red", fontSize: "20px", textAlign: "center"}}>
+                            {showError && "Please complete every field"}
+                    </p>
+
+                    {/* Resident program select menu */}
+                    <div className="programs-wrapper">
+                        <div className="programs-container">
+                            <p className="program-text">Program:</p>
+                            <Form style={{ flexGrow: 1 }}>
+                                <Form.Select className="program-input" aria-label="Select your program" value={program} onChange={(e) => updateProgram(e.target.value)}>
+                                    <option disabled value="">-Select-</option>
+                                    {programData[0].program.map((item, index) => (
+                                        <option key={index} value={item}>{item}</option>
+                                    ))}
+                                </Form.Select>
+                            </Form>
+                        </div>
+                    </div>
+                    
+                    {/* Resident PGY select menu */}
+                    <div className="programs-wrapper">
+                        <div className="programs-container">
+                            <p className="program-text">PGY Level:</p>
+                            <Form style={{ flexGrow: 1 }}>
+                                <Form.Select className="program-input" aria-label="Default select example" value={pgy} onChange={(f) => updatePgy(f.target.value)}>
+                                    <option disabled value="">-Select-</option>
+                                    {programData[1].pgy.map((item, index) => (
+                                        <option key={index} value={item}>{item}</option>
+                                    ))}
+                                </Form.Select>
+                            </Form>
+                        </div>
+                    </div>
+                    
+                    {/* Resident number of students input field */}
+                    <Form>
+                        <Form.Group className="medical-info-input">
+                            <Form.Label className="medical-info-label">How many medical students are you typically responsible for teaching?</Form.Label>
+
+                            <Form.Control
+                            placeholder="Enter your response here"
+                            aria-label="Number of student's taught"
+                            aria-describedby="basic-addon2"
+                            className="custom-email-input"
+                            value={numStudents}
+                            onChange={(g) => updateNumStudents(g.target.value)}
+                            />
+                        </Form.Group>
+                    </Form>
+                    
+                    {/* Resident formal education input field */}
+                    <Form>
+                        <Form.Group className="medical-info-input">
+                            <Form.Label className="medical-info-label">Have you received any formal education related to developing your skills as a teacher?</Form.Label>
+                            <Form.Control
+                            placeholder="Enter your response here"
+                            aria-label="Formal education"
+                            aria-describedby="basic-addon2"
+                            className="custom-email-input"
+                            value={formalEducation}
+                            onChange={(h) => updateFormalEducation(h.target.value)}
+                            />
+                        </Form.Group>
+                    </Form>
+                </>
             ) : (
                 <>
                     {/* End of questions, prompt for email */}
@@ -267,6 +386,7 @@ const Questions = () => {
                             {showError && "Please input a valid email address"}
                     </p>
                     
+                    {/* Resident email input field */}
                     <Form>
                         <Form.Group className="email-input" controlId="exampleForm.ControlInput1">
                             <Form.Control
@@ -294,7 +414,7 @@ const Questions = () => {
             <div style={{ display: "flex", alignItems: "center", gap: "10px", width: "100%" }}>
                 {/* Shows Back button if not on the first question */}
                 {index > 0 ? (
-                    <button style={{ backgroundColor: "#062b50", color: "white"}} onClick={setPrevQuestion}>
+                    <button style={{ backgroundColor: "#062b50", color: "white", borderRadius: "6px" }} onClick={setPrevQuestion}>
                         Back
                     </button>
                 ) : (
@@ -308,9 +428,9 @@ const Questions = () => {
 
                 {/* Shows Next button if not on the last question */}
                 {index + 1 < questiondata.length ? (
-                   <button style={{ backgroundColor: "#062b50", color: "white"}} onClick={setNextQuestion}>Next</button>
+                   <button style={{ backgroundColor: "#062b50", color: "white", borderRadius: "6px"}} onClick={setNextQuestion}>Next</button>
                 ) : (
-                    <button type="submit" style={{ backgroundColor: "#062b50", color: "white"}} onClick={setNextQuestion}>Finish</button>
+                    <button type="submit" style={{ backgroundColor: "#062b50", color: "white", borderRadius: "6px"}} onClick={setNextQuestion}>Finish</button>
                 )}
             </div>
             

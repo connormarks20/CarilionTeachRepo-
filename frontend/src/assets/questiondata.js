@@ -98,9 +98,62 @@ export const questiondata = [
             { label: "Not Confident", score: 1 }
         ]
     },
+    {
+        category: "Resident Educator Information",
+        question: "Resident Educator Information"
+    },
     // Make sure this entry is the final entry in the questions list to capture user email
     {
         category: "Email Entry",
         question: "Enter your email address to receive a report of your responses."
+    }
+]
+
+export const programData = [
+    {
+        program: [
+            "Addiction Medicine",
+            "Adult Joint Reconstructive Surgery",
+            "Cardiovascular Disease",
+            "Child & Adolescent Psychiatry",
+            "Critical Care Medicine",
+            "Dermatology",
+            "Emergency Medical Services",
+            "Emergency Medicine",
+            "Family Medicine",
+            "Gastroenterology",
+            "General Surgery",
+            "Geriatric Medicine",
+            "Geriatric Psychiatry",
+            "Hand Surgery",
+            "Hospice and Palliative Medicine",
+            "Hospital Dentistry",
+            "Infectious Diseases",
+            "Internal Medicine",
+            "Interventional Cardiology",
+            "Neurology",
+            "Neurosurgery",
+            "OBGYN",
+            "Orthopaedic Surgery",
+            "Pediatrics",
+            "Plastic Surgery",
+            "Podiatry",
+            "Psychiatry",
+            "Pulmonary Critical Care Medicine",
+            "Rheumatology",
+            "Surgical Critical Care",
+            "Other"
+        ]
+    },
+    {
+        pgy: [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+        ]
     }
 ]
