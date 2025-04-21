@@ -13,7 +13,8 @@ const Questions = () => {
     let [index, setIndex] = useState(0); /* Question index state variable */
     let [question, setQuestion] = useState(questiondata[index]); /* Question data state variable */
     let [answers, setAnswers] = useState([]);  /* Answer data stored in array */
-    const [improvementAreas, setimprovementAreas] = useState([]); /* Low scoring answers stored in array */
+    let [questionScores, setQuestionScores] = useState([]);
+    const [improvementAreas, setImprovementAreas] = useState([]); /* Low scoring answers stored in array */
     let [showError, setShowError] = useState(false); /* Shows an error if a user selects 'Next' without choosing an answer */
     
     // Resident educator information variables
@@ -125,15 +126,30 @@ const Questions = () => {
         setSelectedOption(option);
 
         // Add low scoring category to weakness areas
-        if (score <= 3) {
-            setimprovementAreas((prevScores) => {
-                // Avoid adding duplicates, and only store unique options
-                if (!prevScores.includes(category)) {
-                    return [...prevScores, category];
-                }
-                return prevScores;
+        setQuestionScores((prevScores) => {
+            // Copy scores array
+            const newScores = [...prevScores];
+            newScores[questionIndex] = { score, category };
+
+            // Recalculate improvementAreas from updated scores
+            const categoryScores = {};
+            
+            // Build categoryScores map
+            newScores.forEach(({ score, category }) => {
+                if (!categoryScores[category]) categoryScores[category] = [];
+                categoryScores[category].push(score);
             });
-        }
+            
+            // Extract low scores
+            const updatedImprovementAreas = Object.entries(categoryScores)
+                .filter(([_, scores]) => scores.some((s) => s <= 3))
+                .map(([cat]) => cat);
+
+            // Set low scores as areas of improvement
+            setImprovementAreas(updatedImprovementAreas);
+
+            return newScores;
+        });
         
         // Updates the entire answers array, adding the new answer
         setAnswers((prevAnswers) => {

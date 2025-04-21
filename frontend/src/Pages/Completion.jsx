@@ -59,11 +59,11 @@ export function Completion() {
                         Review the following teaching domains with associated resources linked to your areas
                         of improvement:
                     </p>
-                    {improvementAreas.length > 1 ? (
+                    
+                    {/* Check if there are improvement areas */}
+                    {improvementAreas.length > 0 ? (
                     <>
                         <ul className="content-domains-items">
-                            {/* If improvement areas */}
-                            
                                 {improvementAreas.map((area, index) => (
                                     <li key={index}>{area}</li>
                                 ))}
