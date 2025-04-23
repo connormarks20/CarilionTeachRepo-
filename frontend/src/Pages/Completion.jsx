@@ -1,23 +1,22 @@
+// Functional imports
 import { useNavigate } from "react-router";
 import { useLocation } from "react-router-dom";
-import TeachLogo from "../assets/teachlogowhite.jpg";  
-import './Completion.css';
-import { educatortopicdata } from "../assets/educatortopicdata.js";
 import { useState } from "react";
 
+import TeachLogo from "../assets/teachlogowhite.jpg"; /* Teach logo */
+import { educatortopicdata } from "../assets/educatortopicdata.js"; /* Resource data */
+import './Completion.css'; /* CSS import */
+
 export function Completion() {
-    const location = useLocation();
-    let navigate = useNavigate();
-    const improvementAreas = location.state?.improvementAreas || [];
+    const location = useLocation(); /* Location variable */
+    let navigate = useNavigate(); /* Navigation variable */
+    const improvementAreas = location.state?.improvementAreas || []; /* Improvement areas from Questions.jsx */
 
     // Maps areas for improvement to accordion indices
-    const mapAreasToAccordionIndices = (areas) => {
-        console.log("Lower cased areas " + areas);
-        
+    const mapAreasToAccordionIndices = (areas) => {        
         return educatortopicdata
           .map((topic, index) =>
             areas.includes(topic.category) ? index : null
-            // console.log("Categories " + topic.category)
           )
         .filter((i) => i !== null);
     };
@@ -25,7 +24,6 @@ export function Completion() {
     // Navigates to home, displaying the relevant resources based on assessment results
     const navigateHomeWithResources = () => {
         const matchedIndices = mapAreasToAccordionIndices(improvementAreas);
-        // console.log("matched indices " + matchedIndices);
         const url = `/?resources=${matchedIndices.join(",")}`;
         navigate(url);
     }
@@ -53,7 +51,7 @@ export function Completion() {
                 {/* Content divider */}
                 <hr className="content-divider" />
 
-                {/*  */}
+                {/* Areas of improvement */}
                 <div className="content-domains">
                     <p>
                         Review the following teaching domains with associated resources linked to your areas
@@ -81,15 +79,16 @@ export function Completion() {
                     )}
                 </div>
 
-                {/*  */}
+                {/* Home navigation button */}
                 <button className="content-button" onClick={() => navigateHomeWithResources()}>Learn More about these Topics</button>
                 
-                {/* */}
+                {/* Contact content */}
                 <p className="content-contact">
                     If you have any questions or would like to further discuss your self-assessment results,
                     please contact Mariah Rudd, <a href="mailto:mjrudd@carilionclinic.org" target="_blank">mjrudd@carilionclinic.org</a>
                 </p>
-
+                
+                {/* Footer content */}
                 <p className="content-footer">
                     Thank you for your dedication to teaching and learning!
                 </p>

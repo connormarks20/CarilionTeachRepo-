@@ -6,7 +6,7 @@
     width: 100%;
     height: 80px;
     background-color: #03822b;
-    position: fixed; /* Make relative to scroll off page */
+    position: fixed;
     top: 0;
     left: 0;
     z-index: 1000;
@@ -15,6 +15,7 @@
     align-items: center;
 }
 
+/* Top bar image */
 .home-top-bar img {
     height: 680px;
     width: auto;
@@ -31,15 +32,17 @@
     border: none;
 }
 
-/* Welcome Section Container */
+/*************************************************************************************************************************/
+
+/* CSS for welcome section */
 .welcome-section {
     display: flex;
-    position: relative; /* Enables overlay positioning */
+    position: relative; 
     width: 100%;
-    height: 750px; /* Adjust height as needed */
+    height: 750px; 
 }
 
-/* Left Half (Green Background) */
+/* Welcome left half container */
 .welcome-left {
     background-color: #e0ebe0;
     flex: 1;
@@ -50,7 +53,25 @@
     padding: 20px;
 }
 
-/* Right Half (White Background) */
+/* Welcome left title */
+.welcome-title {
+    font-size: 4rem;
+    color: green;
+    font-weight: bold;
+    margin: 0;
+    font-family: "Montserrat", sans-serif;
+}
+
+/* Welcome left subtitle */
+.welcome-subtitle {
+    font-size: 2rem;
+    color: black;
+    font-weight: normal;
+    margin-top: 5px;
+    font-family: "Roboto", sans-serif;
+}
+
+/* Welcome right half container */
 .welcome-right {
     background-color: white;
     flex: 1;
@@ -62,24 +83,7 @@
     padding: 100px 20px;
 }
 
-/* Welcome Title */
-.welcome-title {
-    font-size: 4rem;
-    color: green;
-    font-weight: bold;
-    margin: 0;
-    font-family: "Montserrat", sans-serif;
-}
-
-/* Welcome Subtitle */
-.welcome-subtitle {
-    font-size: 2rem;
-    color: black;
-    font-weight: normal;
-    margin-top: 5px;
-    font-family: "Roboto", sans-serif;
-}
-
+/* Welcome right header */
 .welcome-right-teach-header {
     text-align: left;
     font-size: 2rem;
@@ -88,59 +92,75 @@
     color:#03822b;
 }
 
+/* Green separator */
+.separator-2 {
+    width: 10%;
+    height: 5px;
+    color:#03822b;
+    background-color: #03822b; 
+    margin: 20px auto;
+    border: none;
+}
+
+/* Welcome right description */
 .welcome-description {
     font-size: 1.3rem;
     font-family: "Montserrat", sans-serif;
 }
 
-/* Overlay Image */
+/* Welcome overlay image */
 .welcome-overlay-root {
     position: absolute;
     top: 51%;
     left: 50%;
-    transform: translate(-50%, -30%); /* Centers & slightly shifts it */
-    height: 77%; /* Adjust for appropriate size */
+    transform: translate(-50%, -30%); 
+    height: 77%;
     width: 100%;
-    z-index: 10; /* Ensures it sits above both sections */
+    z-index: 10; 
 }
 
+/* Welcome overlay image */
 .welcome-overlay-plant-small {
     position: absolute;
     top: 93%;
     left: 55%;
-    transform: translate(-50%, -30%); /* Centers & slightly shifts it */
-    height: 10%; /* Adjust for appropriate size */
+    transform: translate(-50%, -30%); 
+    height: 10%; 
     width: 4%;
-    z-index: 10; /* Ensures it sits above both sections */
+    z-index: 10; 
 }
 
+/* Welcome overlay image */
 .welcome-overlay-plant-medium {
     position: absolute;
     top: 86%;
     left: 67%;
-    transform: translate(-50%, -30%); /* Centers & slightly shifts it */
-    height: 25%; /* Adjust for appropriate size */
+    transform: translate(-50%, -30%); 
+    height: 25%; 
     width: 12.5%;
-    z-index: 10; /* Ensures it sits above both sections */
+    z-index: 10; 
 }
 
+/* Welcome overlay image */
 .welcome-overlay-plant-large {
     position: absolute;
     top: 77%;
     left: 85%;
-    transform: translate(-50%, -30%); /* Centers & slightly shifts it */
-    height: 40%; /* Adjust for appropriate size */
+    transform: translate(-50%, -30%); 
+    height: 40%; 
     width: 17%;
-    z-index: 10; /* Ensures it sits above both sections */
+    z-index: 10; 
 }
 
-/* Title section container with limited width */
+/*************************************************************************************************************************/
+
+/* CSS for resources section */
 .section-title-container {
-    background-color: #e0ebe0; /* Light green background */
+    background-color: #e0ebe0;
     padding: 20px;
-    border-radius: 10px; /* Smooth edges */
-    max-width: 97vw; /* Matches the description width */
-    margin: 0 auto 20px; /* Centers it & adds spacing below */
+    border-radius: 10px; 
+    max-width: 97vw; 
+    margin: 0 auto 20px; 
     text-align: center;
 }
 
@@ -153,34 +173,27 @@
 
 /* Section description */
 .section-description {
-    max-width: 800px; /* Prevents text from stretching too wide */
-    margin: 0 auto; /* Centers the block on the screen */
-    font-size: 1.3rem; /* Adjusts readability */
+    max-width: 800px; 
+    margin: 0 auto; 
+    font-size: 1.3rem; 
     text-align: left;
-    line-height: 1.6; /* Adds spacing for readability */
-    color: #333; /* Dark gray for good contrast */
-    padding: 20px; /* Adds spacing around text */
+    line-height: 1.6; 
+    color: #333; 
+    padding: 20px; 
     font-family: "Montserrat", sans-serif;
 
 }
 
-.separator-2 {
-    width: 10%;
-    height: 5px;
-    color:#03822b;
-    background-color: #03822b; 
-    margin: 20px auto;
-    border: none;
-}
+/*************************************************************************************************************************/
 
+/* CSS for resources accordion */
 .accordion-container {
     display: flex;
-    justify-content: center; /* Centers horizontally */
-    align-items: center; /* Centers vertically */
-    /* background-color: #f0f0f0;  Optional background */
+    justify-content: center; 
+    align-items: center; 
 }
 
-/* Custom accordion styles */
+/* Accordion container */
 .custom-accordion {
     max-width: 600px;
     margin: 0 auto;
@@ -211,14 +224,14 @@
 }
 
 .accordion-button.collapsed {
-    background-color: #b9cbb9 !important; /* Dark green */
-    color: black !important; /* Set text color to black */
+    background-color: #b9cbb9 !important; 
+    color: black !important; 
 }
 
-/* Ensure the active (opened) accordion keeps its color */
+/* Ensure the open accordion keeps its color */
 .accordion-button:not(.collapsed) {
     background-color: #b9cbb9 !important;
-    color: black !important; /* Set text color to black */
+    color: black !important; 
 }
 
 /* Remove default Bootstrap outline */
@@ -227,10 +240,42 @@
     border: none !important;
 }
 
+/*************************************************************************************************************************/
 
+/* CSS for start survey box */
+.survey-box {
+    width: 700px; 
+    border-radius: 20px; 
+    overflow: hidden; 
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); 
+    margin-bottom: 20px;
+}
 
+/* Top half */
+.survey-box-top {
+    background-color: #235485; 
+    color: white;
+    font-size: 2.1rem;
+    font-weight: bold;
+    padding: 20px;
+    font-family: "Montserrat", sans-serif;
+}
 
-/************* Bottom Elements ******************/
+/* Middle separator */
+.survey-box-divider {
+    background-color: #8eacc1; 
+    height: 5px;
+}
+
+/* Bottom half */
+.survey-box-bottom {
+    background-color: #ebebeb; 
+    color: black;
+    padding: 20px;
+    font-size: 1.1rem;
+    font-family: "Roboto", sans-serif;
+}
 
 /* Start survey button */
 .start-survey-button {
@@ -245,56 +290,25 @@
     transition: background 0.3s ease-in-out;
 }
 
+/* Changes color when hovering over button */
 .start-survey-button:hover {
     background-color: #1a3c60;
 }
 
-/* Outer box */
-.survey-box {
-    width: 700px; /* Adjust width as needed */
-    border-radius: 20px; /* Rounded corners */
-    overflow: hidden; /* Ensures children elements conform to border-radius */
-    text-align: center;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow */
-    margin-bottom: 20px;
-}
-
-/* Top half */
-.survey-box-top {
-    background-color: #235485; /* Light blue */
-    color: white;
-    font-size: 2.1rem;
-    font-weight: bold;
-    padding: 20px;
-    font-family: "Montserrat", sans-serif;
-}
-
-/* Middle separator */
-.survey-box-divider {
-    background-color: #8eacc1; /* Slightly darker separator */
-    height: 5px;
-}
-
-/* Bottom half */
-.survey-box-bottom {
-    background-color: #ebebeb; /* Light gray */
-    color: black;
-    padding: 20px;
-    font-size: 1.1rem;
-    font-family: "Roboto", sans-serif;
-}
+/*************************************************************************************************************************/
 
 /* CSS for bottom bar */
 .home-bottom-bar {
-    display: flex;            /* Enable flexbox for the container */
-    justify-content: center;  /* Centers the image horizontally */
-    align-items: center;      /* Centers the image vertically */
-    height: 10px;             /* Set the height of the container */
+    display: flex;            
+    justify-content: center;  
+    align-items: center;      
+    height: 10px;             
 }
 
+/* Bottom bar images */
 .home-bottom-bar img {
-    height: 70px;            /* Set the height of the image */
-    width: auto;             /* Maintain the aspect ratio */
+    height: 70px;            
+    width: auto;             
     padding-top: 10px;
 }
 
@@ -316,7 +330,6 @@
     }
 }
 
-/* Adjust height for smaller screens */
 @media (max-height: 500px) {
     .welcome-section {
         height: 140vh;
@@ -338,27 +351,25 @@
 /* Mobile adjustments */
 @media (max-width: 768px) {
     .home-top-bar {
-        height: 60px; /* Slightly smaller for mobile */
+        height: 60px; 
     }
 
     .home-top-bar img {
-        height: 61px !important; /* Reduce logo size */
+        height: 61px !important; 
     }
 
     .welcome-section {
-        /* height: 1000px; */
         min-height: 700px;
     }
 
     .welcome-left,
     .welcome-right {
-        width: 100%; /* Full width */
-        padding: 60px 15px; /* Adjust padding */
+        width: 100%; 
+        padding: 60px 15px; 
     }
 
-    /* djust text sizes */
     .welcome-title {
-        font-size: 2rem; /* Smaller font */
+        font-size: 2rem; 
     }
 
     .welcome-subtitle {
@@ -373,7 +384,6 @@
         font-size: 0.8rem;
     }
 
-    /* Adjust Overlay Images */
     .welcome-overlay-root {
         top: 68%;
         height: 50%;
@@ -398,7 +408,6 @@
         left: 87%;
     }
 
-    /* Adjust Section Title */
     .section-title {
         font-size: 1.8rem;
     }
@@ -408,18 +417,15 @@
         padding: 20px;
     }
 
-    /* Adjust Accordion */
     .custom-accordion {
-        max-width: 90%; /* Prevents overflow */
+        max-width: 90%; 
     }
 
-    /* Adjust Button */
     .start-survey-button {
         font-size: 0.9rem;
         padding: 8px 15px;
     }
 
-    /* Adjust Survey Box */
     .survey-box {
         width: 90%;
     }
@@ -434,8 +440,7 @@
         padding: 15px;
     }
 
-    /* Adjust Bottom Bar */
     .home-bottom-bar img {
-        height: 50px; /* Smaller */
+        height: 50px; 
     }
 }

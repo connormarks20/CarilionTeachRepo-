@@ -1,12 +1,18 @@
+// Functional imports
 import { useRef, useState } from "react";
+import { useNavigate } from "react-router";
+
+// UI imports
+import Form from 'react-bootstrap/Form';
+import ProgressBar from "../Components/ProgressBar.jsx";
+import TeachLogo from "../assets/teachlogowhite.jpg";  
+
+// Data imports
 import { questiondata } from "../assets/questiondata.js";
 import { programData } from "../assets/questiondata.js";
-import ProgressBar from "../Components/ProgressBar.jsx";
-import { useNavigate } from "react-router";
+
+// CSS imports
 import './Questions.css';
-import TeachLogo from "../assets/teachlogowhite.jpg";  
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
 
 const Questions = () => {
     // Self assessment question/answer variables
@@ -21,7 +27,9 @@ const Questions = () => {
     let [program, setProgram] = useState("");
     let [pgy, setPgy] = useState("");
     let [numStudents, setNumStudents] = useState("");
+    const numStudentsRef = useRef(null);
     let [formalEducation, setFormalEducation] = useState("");
+    const formalEducationRef = useState(null);
 
     // Email variables
     let [email, setEmail] = useState("");
@@ -60,7 +68,7 @@ const Questions = () => {
     /**
      * Sets question to next question
      * 
-     * @returns 
+     * Provides email validation and error handling
      */
     const setNextQuestion = () => {
         // Ensure user selects an answer before proceeding
@@ -114,18 +122,18 @@ const Questions = () => {
     };
 
     /**
-     * Handles the selection of an answer
+     * Handles the selection of an answer to the self-assessment questions
      * 
-     * @param {*} questionIndex 
-     * @param {*} option 
-     * @param {*} score 
-     * @param {*} category 
+     * @param {*} questionIndex Index of the current question
+     * @param {*} option Currently selected answer to question
+     * @param {*} score Score related to selected option
+     * @param {*} category Category of question
      */
     const handleSelection = (questionIndex, option, score, category) => {
         // Set current selected option
         setSelectedOption(option);
 
-        // Add low scoring category to weakness areas
+        // Update weakness areas in accordance to resident responses
         setQuestionScores((prevScores) => {
             // Copy scores array
             const newScores = [...prevScores];
@@ -160,8 +168,9 @@ const Questions = () => {
     }
 
     /**
+     * Updates resident's program
      * 
-     * @param {*} newProgram 
+     * @param {*} newProgram New program to be stored
      */
     const updateProgram = (newProgram) => {
         setProgram(newProgram);
@@ -169,8 +178,9 @@ const Questions = () => {
     }
 
     /**
+     * Updates resident's program year
      * 
-     * @param {*} newPgy 
+     * @param {*} newPgy New program year to be stored
      */
     const updatePgy = (newPgy) => {
         setPgy(newPgy);
@@ -178,8 +188,9 @@ const Questions = () => {
     }
 
     /**
+     * Updates resident's response to number of students input field
      * 
-     * @param {*} newNumStudents 
+     * @param {*} newNumStudents New response string to be stored
      */
     const updateNumStudents = (newNumStudents) => {
         setNumStudents(newNumStudents);
@@ -187,8 +198,9 @@ const Questions = () => {
     }
 
     /**
+     * Updates resident's response to formal education input field
      * 
-     * @param {*} newFormalEducation 
+     * @param {*} newFormalEducation New response string to be stored
      */
     const updateFormalEducation = (newFormalEducation) => {
         setFormalEducation(newFormalEducation);
@@ -196,12 +208,11 @@ const Questions = () => {
     }
 
     /**
-     * Updates the input user email
+     * Updates the input resident email
      * 
-     * @param {*} newEmail 
+     * @param {*} newEmail New email to be stored
      */
     const updateEmail = (newEmail) => {
-        console.log("value is " + newEmail);
         // Update stored email
         setEmail(newEmail);
 
@@ -209,26 +220,15 @@ const Questions = () => {
         setSelectedOption(newEmail);
     }
 
-    // const handleSubmit = (event) => {
-    //     event.preventDefault();
-    //     console.log("event target" + event.target);
-    //     console.log("event array target " + event.target[0]);
-    //     if (emailInputRef.current) {
-    //         emailInputRef.current.blur();
-    //       }
-    // }
-
     /**
+     * Checks if email matches email format
      * 
-     * @returns 
+     * @returns True if matches, false otherwise
      */
     const validateEmail = () => {
         const re = /\S+@\S+\.\S+/;
-
-        // console.log("email: " + email);
-        // console.log("re value: " + re);
-        // console.log("result value " + re.test(email));
-
+        
+        // Compare strings
         return re.test(email);
     }
 
@@ -239,9 +239,6 @@ const Questions = () => {
                 <p className="top-bar-title">Resident Educator Self-Assessment</p>
                 <img src={TeachLogo} style={{height: "80px"}}/>
             </div>
-
-            {/* <h1 style={{ marginTop: "20px" }}> DEMO v1 </h1>
-            <hr /> */}
 
             {/* Adjust size and position of question text */}
             <div className="question-container">
@@ -370,27 +367,43 @@ const Questions = () => {
                             <Form.Label className="medical-info-label">How many medical students are you typically responsible for teaching?</Form.Label>
 
                             <Form.Control
+                            ref={numStudentsRef}
                             placeholder="Enter your response here"
                             aria-label="Number of student's taught"
                             aria-describedby="basic-addon2"
                             className="custom-email-input"
                             value={numStudents}
                             onChange={(g) => updateNumStudents(g.target.value)}
+                            onKeyDown={(event) => {
+                                // Prevent page refresh and close input field when enter is pressed
+                                if (event.key === "Enter") {
+                                  event.preventDefault();
+                                  numStudentsRef.current.blur(); 
+                                }
+                              }}
                             />
                         </Form.Group>
                     </Form>
                     
                     {/* Resident formal education input field */}
                     <Form>
-                        <Form.Group className="medical-info-input">
+                        <Form.Group className="medical-info-input-2">
                             <Form.Label className="medical-info-label">Have you received any formal education related to developing your skills as a teacher?</Form.Label>
                             <Form.Control
+                            ref={formalEducationRef}
                             placeholder="Enter your response here"
                             aria-label="Formal education"
                             aria-describedby="basic-addon2"
                             className="custom-email-input"
                             value={formalEducation}
                             onChange={(h) => updateFormalEducation(h.target.value)}
+                            onKeyDown={(event) => {
+                                // Prevent page refresh and close input field when enter is pressed
+                                if (event.key === "Enter") {
+                                  event.preventDefault();
+                                  formalEducationRef.current.blur(); 
+                                }
+                              }}
                             />
                         </Form.Group>
                     </Form>

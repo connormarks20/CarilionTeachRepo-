@@ -1,11 +1,14 @@
+// Functional imports
+import React from "react";
 import { useEffect, useState } from "react";
-import Form from "../Components/Form.jsx";
-import ProgressBar from "../Components/ProgressBar.jsx";
-import { Link } from "react-router-dom"
 import { useNavigate } from "react-router";
 import { useSearchParams } from "react-router";
-import Questions from "./Questions.jsx";
+
+// Resource imports
 import Accordion from 'react-bootstrap/Accordion';
+import { educatortopicdata } from "../assets/educatortopicdata.js";
+
+// Image imports
 import TeachLogo from "../assets/teachlogowhite.jpg";  
 import TeachCombinedLogos from "../assets/teachcombinedlogos.png"; 
 import TeachLogoNoWords from "../assets/teachlogowithoutwords.png"; 
@@ -13,12 +16,11 @@ import TeachLogoRoot from "../assets/teachlogoroot.png";
 import TeachLogoPlantSmall from "../assets/teachlogoplantsmall.png"; 
 import TeachLogoPlantMedium from "../assets/teachlogoplantmedium.png"; 
 import TeachLogoPlantLarge from "../assets/teachlogoplantlarge.png"; 
+
+// CSS imports
 import './Home.css';
-import { educatortopicdata } from "../assets/educatortopicdata.js";
-import React from "react";
 
 export function Home() {
-    const [backendMessage, setBackendMessage] = useState("Loading...");
     let navigate = useNavigate(); /* Router navigation variable */
 
     // Accordion variables
@@ -36,15 +38,6 @@ export function Home() {
         }
       }, []);
 
-    // Gets data from backend when the component mounts 
-    useEffect(() => {
-
-        fetch("http://localhost:5000/") // this port might need to be changed depending on people's systems. 
-        .then((res) => res.text())
-        .then((data) => setBackendMessage(data))
-        .catch(() => setBackendMessage("Could not connect to backend"));
-    }, []);
-
     // Navigates to survey page
     const startSurvey = () => {
         navigate("/Questions");         
@@ -58,29 +51,30 @@ export function Home() {
                     <img src={TeachLogo} style={{height: "80px"}}/>
                 </div>
 
-                {/* <h1>Carilion TEACH</h1>
-                <p style={{ fontSize: "18px", fontWeight: "bold" }}>
-                    Backend Response: {backendMessage}
-                </p> */}
-
-                {/* Welcome Section */}
+                {/* Welcome section */}
                 <div className="welcome-section">
-                    {/* Left Half */}
+                    {/* Left half */}
                     <div className="welcome-left">
+                        {/* Left title */}
                         <h1 className="welcome-title">Welcome</h1>
+
+                        {/* Left subtitle */}
                         <h3 className="welcome-subtitle">To TEACH to Go!</h3>
                     </div>
 
-                    {/* Right Half */}
+                    {/* Right half */}
                     <div className="welcome-right">
+                        {/* Right header */}
                         <div className="welcome-right-teach-header">
                             <p style={{ margin: 0, padding: 0, lineHeight: 1.5 }}>TEACH To-Go</p>
                         </div>
 
+                        {/* Divider line */}
                         <div style={{ width: "100%", textAlign: "left" }}>
                             <hr className="separator-2" style={{ width: "50%", margin: "5px 0 10px 0" }} />
                         </div>
 
+                        {/* TEACH to Go description */}
                         <div className="welcome-description">
                             <p style={{marginBottom: "50px"}}>
                                 TEACH to Go is your mobile companion, offering a comprehensive collection of teaching resources tailored
@@ -99,22 +93,23 @@ export function Home() {
                         </div>
                     </div>
 
-                    {/* Overlay Image */}
+                    {/* Overlay images */}
                     <img src={TeachLogoPlantSmall} alt="Overlay Image" className="welcome-overlay-plant-small" />
                     <img src={TeachLogoPlantMedium} alt="Overlay Image" className="welcome-overlay-plant-medium" />
                     <img src={TeachLogoPlantLarge} alt="Overlay Image" className="welcome-overlay-plant-large" />
                     <img src={TeachLogoRoot} alt="Overlay Image" className="welcome-overlay-root" />
                 </div>
 
-                {/* Black Separator Line */}
+                {/* Black separator line */}
                 <hr className="separator" style={{margin: "40px 0"}} />
                 
+                {/* Section title */}
                 <div className="section-title-container">
                     <p className="section-title">About the Health Professions Educator Topics</p>
                     <hr className="separator-2" />
                 </div>
 
-                {/* Section Descriptions */}
+                {/* Section descriptions */}
                 <div className="section-description">
                     <p> 
                         As an extension of the Teaching Excellence Academy for Collaborative Healthcare (TEACH),
@@ -128,6 +123,7 @@ export function Home() {
                     </p>
                 </div>
                 
+                {/* Resource accordion */}
                 <Accordion className="custom-accordion" ref={accordionRef} defaultActiveKey={defaultKeys} alwaysOpen>
                 {educatorTopic.map((topic, index) => (
                     <Accordion.Item className="custom-accordion-item" eventKey={index.toString()} key={index}>
@@ -180,21 +176,21 @@ export function Home() {
                 </Accordion>
             </div>
 
-            {/* Black Separator Line */}
+            {/* Black separator line */}
             <hr className="separator" style={{margin: "40px 0"}} />
             
-            {/* */}
+            {/* Begin self-assessment box */}
             <div className="accordion-container">
                 <div className="survey-box">
-                    {/* Top Half */}
+                    {/* Top half */}
                     <div className="survey-box-top">
                         Resident Educator Self-Assessment
                     </div>
 
-                    {/* Middle Separator */}
+                    {/* Middle separator */}
                     <div className="survey-box-divider"></div>
 
-                    {/* Bottom Half */}
+                    {/* Bottom half */}
                     <div className="survey-box-bottom">
                         <p style={{ textAlign: "left" }}>
                             This tool is designed to help residents evaluate their confidence and skills across
@@ -210,7 +206,7 @@ export function Home() {
                 </div>
             </div>
 
-            {/* */}
+            {/* Black seperator line */}
             <hr className="separator" />
             
             {/* TEACH logos */}

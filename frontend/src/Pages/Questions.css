@@ -1,72 +1,3 @@
-/* Question container for better responsiveness */
-.question-container {
-    max-width: 600px; /* Keeps desktop width similar */
-    margin: 10vh auto 0;
-    text-align: center;
-    padding: 1rem;
-}
-
-/* Responsive question text */
-.question-text {
-    color: #595959;
-    font-weight: 500;
-    font-size: clamp(1.2rem, 3vw, 2rem); /* Responsive text */
-    font-family: "Montserrat", sans-serif;
-    line-height: 1.4;
-    margin-bottom: 1rem;
-}
-
-/* Make text more readable on smaller screens */
-@media (max-width: 768px) {
-    .question-container {
-        max-width: 90vw; /* More flexible width */
-        padding: 0.5rem;
-    }
-
-    .question-text {
-        font-size: clamp(1.2rem, 4vw, 1.6rem); /* Limits excessive scaling */
-    }
-}
-
-/* CSS for radio buttons */
-.radio-group {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
-}
-
-.radio-box {
-    display: flex;
-    align-items: center;
-    padding: 15px; /* Keeps original padding */
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1.2rem; /* Adjusts for different screens */
-    max-width: 300px;
-    width: 100%;
-    color: white;
-    text-align: center;
-}
-
-.radio-box input[type="radio"] {
-    margin-right: 10px;
-}
-
-.selected {
-    font-weight: bold;
-    border: 2px solid #333;
-}
-
-/* Make radio buttons better on mobile */
-@media (max-width: 768px) {
-    .radio-box {
-        font-size: 1rem; /* Slightly smaller font */
-        max-width: 80vw; /* More responsive width */
-        padding: 12px; /* Reduce padding slightly for compact layout */
-    }
-}
-
 /* CSS for top bar */
 .top-bar {
     width: 100%;
@@ -82,21 +13,23 @@
     padding: 0 20px;
 }
 
+/* Top bar title */
 .top-bar-title {
     color: white;
     font-size: 2rem;
     font-weight: bold;
-    position: absolute; /* Ensure it's truly centered */
+    position: absolute; 
     left: 50%;
-    transform: translateX(-50%); /* Shift it back by 50% of its width */
-    white-space: normal; /* Allow wrapping */
-    word-wrap: break-word; /* Break long words if necessary */
+    transform: translateX(-50%); 
+    white-space: normal; 
+    word-wrap: break-word; 
     line-height: 1.2;
     margin: 0;
-    flex-grow: 1; /* Ensure title takes available space */
+    flex-grow: 1; 
     text-align: center;
 }
 
+/* Top bar image */
 .top-bar img {
     height: 80px;
     width: auto;
@@ -105,133 +38,27 @@
     margin-right: -20px;
 }
 
-/* Make top bar image scale better on smaller screens */
-@media (max-width: 768px) {
-    .top-bar {
-        height: 60px; /* Slightly smaller for mobile */
-        padding: 0 10px;
-    }
+/*************************************************************************************************************************/
 
-    .top-bar img {
-        height: 61px !important; /* Reduce logo size */
-        margin-right: -11px;
-    }
-
-    .top-bar-title {
-        font-size: 1rem; /* Scale down for smaller screens */
-        max-width: 70%;
-    }
-}
-
-/* Make top bar image scale better on even smaller screens */
-@media (max-width: 480px) {
-    .top-bar-title {
-        font-size: 0.85rem; /* Even smaller font size */
-        max-width: 50%; /* Adjust width further */
-    }
-}
-
-/* Keep the question text looking similar, but better on mobile */
+/* CSS for self-assessment questions */
 .question-container {
-    max-width: 600px;
-    margin: 10vh auto 0; /* Space from top bar */
+    max-width: 600px; 
+    margin: 10vh auto 0;
     text-align: center;
     padding: 1rem;
 }
 
+/* Self-assessment question text */
 .question-text {
     color: #595959;
     font-weight: 500;
-    font-size: clamp(1.2rem, 2.5vw, 2rem); /* Scales better */
+    font-size: clamp(1.2rem, 3vw, 2rem); 
     font-family: "Montserrat", sans-serif;
     line-height: 1.4;
     margin-bottom: 1rem;
 }
 
-/* Adjust question text only for mobile */
-@media (max-width: 768px) {
-    .question-container {
-        max-width: 90vw; /* More flexible width */
-    }
-
-    .question-text {
-        font-size: 1.4rem; /* Adjust for better readability */
-        font-weight: 500;
-    }
-}
-
-.programs-wrapper {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-
-.programs-container {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.program-text {
-    font-size: 1.2rem;
-    white-space: nowrap;
-    font-family: "Montserrat", sans-serif;
-}
-
-.program-input {
-    font-size: 1.5rem;
-    padding: 15px;
-    border: 5px solid #477caa !important;
-    border-radius: 8px;
-    width: 200px !important; /* 🎯 Fixed size */
-}
-
-.medical-info-input {
-    display: flex;              /* Enable flexbox */
-    flex-direction: column;     /* Stack children vertically */
-    align-items: center;        /* Center horizontally */
-    justify-content: center;    /* Center vertically */
-    padding: 15px;
-    width: 100%;                /* Use full width, not 100vw */
-    box-sizing: border-box;     /* Ensure padding is included in the width */
-}
-
-.medical-info-label {
-    font-family: "Montserrat", sans-serif;
-    font-size: 1.1rem;
-    max-width: 570px;              /* Reasonable max-width */
-    width: fit-content;            /* Only take up as much space as needed */
-    margin: 0 auto 10px auto;      /* Center the label horizontally */
-    text-align: center;
-    display: block;                /* Ensures margin auto works */
-    word-wrap: break-word;    
-}
-
-@media (max-width: 768px) {
-    .medical-info-label {
-        max-width: 300px;
-    }
-}
-
-
-.email-input {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 12rem;
-    padding: 1rem;
-}
-
-.custom-email-input {
-    font-size: 1.5rem; /* Makes text larger */
-    padding: 15px; /* Increases padding for larger field */
-    border: 5px solid #477caa !important; /* Blue outline */
-    border-radius: 8px; /* Optional: smooth corners */
-    width: 100vw; /* Ensures it stretches properly */
-}
-
-/* CSS for radio buttons 
+/* Self-assessment answers */
 .radio-group {
     display: flex;
     flex-direction: column;
@@ -239,46 +66,164 @@
     align-items: center;
 }
 
+/* Self-assessment answer radio box */
 .radio-box {
     display: flex;
     align-items: center;
-    padding: 15px; /* Adjust padding for more space 
+    padding: 15px; 
     border-radius: 8px;
     cursor: pointer;
-    font-size: 20px; /* Increase the font size for text 
-    max-width: 300px; /* Increase the max-width for the container 
+    font-size: 1.2rem; 
+    max-width: 300px;
     width: 100%;
     color: white;
+    text-align: center;
 }
 
 .radio-box input[type="radio"] {
     margin-right: 10px;
 }
 
+/* Selected answer styling */
 .selected {
     font-weight: bold;
     border: 2px solid #333;
 }
 
-/* CSS for top bar 
-.top-bar {
-    width: 100%;
-    height: 80px;
-    background-color: #81b5da;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
+/*************************************************************************************************************************/
+
+/* CSS for resident information input fields */
+.programs-wrapper {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
+    justify-content: center;
+    margin-bottom: 20px;
 }
-  
-.top-bar img {
-    height: 80px;
-    width: auto;
-    object-fit: contain;
-    margin-left: auto;
-    margin-right: 20px;
-}*/
+
+/* Container for resident program text */
+.programs-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Program text styling */
+.program-text {
+    font-size: 1.2rem;
+    white-space: nowrap;
+    font-family: "Montserrat", sans-serif;
+}
+
+/* Program dropdown field */
+.program-input {
+    font-size: 1.5rem;
+    padding: 15px;
+    border: 5px solid #477caa !important;
+    border-radius: 8px;
+    width: 200px !important; 
+}
+
+/* Free response input field */
+.medical-info-input {
+    display: flex;              
+    flex-direction: column;     
+    align-items: center;        
+    justify-content: center;    
+    margin-bottom: 15px;
+    width: 100%;                
+    box-sizing: border-box;     
+}
+
+/* Second free response input field */
+.medical-info-input-2 {
+    display: flex;              
+    flex-direction: column;     
+    align-items: center;       
+    justify-content: center;    
+    margin-bottom: 30px;
+    width: 100%;               
+    box-sizing: border-box;     
+}
+
+/* Label for free response fields */
+.medical-info-label {
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.1rem;
+    max-width: 570px;              
+    width: fit-content;            
+    margin: 0 auto 10px auto;      
+    text-align: center;
+    display: block;                
+    word-wrap: break-word;    
+}
+
+/*************************************************************************************************************************/
+
+/* CSS for resident email input field */
+.email-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 16.5rem;
+    padding: 1rem;
+}
+
+/* Email input field */
+.custom-email-input {
+    font-size: 1.5rem; 
+    padding: 15px; 
+    border: 5px solid #477caa !important; 
+    border-radius: 8px; 
+    width: 100vw; 
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .top-bar {
+        height: 60px; 
+        padding: 0 10px;
+    }
+
+    .top-bar img {
+        height: 61px !important; 
+        margin-right: -11px;
+    }
+
+    .top-bar-title {
+        font-size: 0.85rem; 
+        max-width: 50%; 
+    }
+
+    .top-bar-title {
+        font-size: 1rem; 
+        max-width: 70%;
+    }
+
+    .question-container {
+        max-width: 90vw; 
+        padding: 0.5rem;
+    }
+
+    .question-text {
+        font-size: clamp(1.2rem, 4vw, 1.6rem); 
+    }
+
+    .radio-box {
+        font-size: 1rem; 
+        max-width: 80vw; 
+        padding: 12px; 
+    }
+
+    .question-container {
+        max-width: 90vw; 
+    }
+
+    .question-text {
+        font-size: 1.4rem; 
+        font-weight: 500;
+    }
+
+    .medical-info-label {
+        max-width: 300px;
+    }
+}
