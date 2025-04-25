@@ -29,7 +29,7 @@ const Questions = () => {
     let [numStudents, setNumStudents] = useState("");
     const numStudentsRef = useRef(null);
     let [formalEducation, setFormalEducation] = useState("");
-    const formalEducationRef = useState(null);
+    const formalEducationRef = useRef(null);
 
     // Email variables
     let [email, setEmail] = useState("");
@@ -242,7 +242,7 @@ const Questions = () => {
 
             {/* Adjust size and position of question text */}
             <div className="question-container">
-                <h2 className="question-text">{question.question}</h2>
+                <h2 className="question-text" dangerouslySetInnerHTML={{ __html: question.question }}/>
             </div>
             
             {/* If there are more questions, display them */}

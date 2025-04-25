@@ -59,14 +59,14 @@ export function Home() {
                         <h1 className="welcome-title">Welcome</h1>
 
                         {/* Left subtitle */}
-                        <h3 className="welcome-subtitle">To TEACH to Go!</h3>
+                        <h3 className="welcome-subtitle">To TEACH-to-Go!</h3>
                     </div>
 
                     {/* Right half */}
                     <div className="welcome-right">
                         {/* Right header */}
                         <div className="welcome-right-teach-header">
-                            <p style={{ margin: 0, padding: 0, lineHeight: 1.5 }}>TEACH To-Go</p>
+                            <p style={{ margin: 0, padding: 0, lineHeight: 1.5 }}>TEACH-to-Go</p>
                         </div>
 
                         {/* Divider line */}
@@ -77,13 +77,13 @@ export function Home() {
                         {/* TEACH to Go description */}
                         <div className="welcome-description">
                             <p style={{marginBottom: "50px"}}>
-                                TEACH to Go is your mobile companion, offering a comprehensive collection of teaching resources tailored
+                                TEACH-to-Go is your mobile companion, offering a comprehensive collection of teaching resources tailored
                                 for health professions educators at Carilion Clinic, the Virginia Tech Carilion School of Medicine,
                                 and Radford University Carilion.
                             </p>
 
                             <p>
-                                With TEACH to Go, you can:
+                                With TEACH-to-Go, you can:
                             </p>
                             <ul>
                                 <li>Access Educator Resources</li>
@@ -105,16 +105,16 @@ export function Home() {
                 
                 {/* Section title */}
                 <div className="section-title-container">
-                    <p className="section-title">About the Health Professions Educator Topics</p>
+                    <p className="section-title">Health Professions Education Resources</p>
                     <hr className="separator-2" />
                 </div>
 
                 {/* Section descriptions */}
                 <div className="section-description">
                     <p> 
-                        As an extension of the Teaching Excellence Academy for Collaborative Healthcare (TEACH),
-                        our mission is to promote learning excellence by creating a community of educators
-                        and fostering their development as teachers, learners, and education scholars. 
+                        As an interactive resource of TEACH Teaching Excellence Academy for Collaborative Healthcare (TEACH),
+                        the purpose of this app is to provide resources and tools to promote learning excellence and fostering
+                        the development of teachers, learners, and education scholars.
                     </p>
 
                     <p>
