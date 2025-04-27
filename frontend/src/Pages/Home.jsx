@@ -1,10 +1,14 @@
+// Functional imports
+import React from "react";
 import { useEffect, useState } from "react";
-import Form from "../Components/Form.jsx";
-import ProgressBar from "../Components/ProgressBar.jsx";
-import { Link } from "react-router-dom"
 import { useNavigate } from "react-router";
-import Questions from "./Questions.jsx";
+import { useSearchParams } from "react-router";
+
+// Resource imports
 import Accordion from 'react-bootstrap/Accordion';
+import { educatortopicdata } from "../assets/educatortopicdata.js";
+
+// Image imports
 import TeachLogo from "../assets/teachlogowhite.jpg";  
 import TeachCombinedLogos from "../assets/teachcombinedlogos.png"; 
 import TeachLogoNoWords from "../assets/teachlogowithoutwords.png"; 
@@ -12,27 +16,29 @@ import TeachLogoRoot from "../assets/teachlogoroot.png";
 import TeachLogoPlantSmall from "../assets/teachlogoplantsmall.png"; 
 import TeachLogoPlantMedium from "../assets/teachlogoplantmedium.png"; 
 import TeachLogoPlantLarge from "../assets/teachlogoplantlarge.png"; 
+
+// CSS imports
 import './Home.css';
-import { educatortopicdata } from "../assets/educatortopicdata.js";
 
 export function Home() {
-    const [backendMessage, setBackendMessage] = useState("Loading...");
-    const [progress, setProgress] = useState(0); /* Progress bar variable */
     let navigate = useNavigate(); /* Router navigation variable */
 
-    //
+    // Accordion variables
     let [educatorTopic, setEducatorTopic] = useState(educatortopicdata);
+    let accordionRef = React.createRef();
+    
+    // Resources variables
+    const [searchParams] = useSearchParams();
+    const defaultKeys = searchParams.get("resources")?.split(",") || [];
 
-    // Gets data from backend when the component mounts 
+    // If navigating to resources, scrolls to accordion
     useEffect(() => {
+        if (defaultKeys.length > 0) {
+            accordionRef.current.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        }
+      }, []);
 
-        fetch("http://localhost:5000/") // this port might need to be changed depending on people's systems. 
-        .then((res) => res.text())
-        .then((data) => setBackendMessage(data))
-        .catch(() => setBackendMessage("Could not connect to backend"));
-    }, []);
-
-    // Increases progress on progress bar and navigates to next page
+    // Navigates to survey page
     const startSurvey = () => {
         navigate("/Questions");         
     };
@@ -45,101 +51,146 @@ export function Home() {
                     <img src={TeachLogo} style={{height: "80px"}}/>
                 </div>
 
-                {/* <h1>Carilion TEACH</h1>
-                <p style={{ fontSize: "18px", fontWeight: "bold" }}>
-                    Backend Response: {backendMessage}
-                </p> */}
-
-                {/* Welcome Section */}
+                {/* Welcome section */}
                 <div className="welcome-section">
-                    {/* Left Half */}
+                    {/* Left half */}
                     <div className="welcome-left">
+                        {/* Left title */}
                         <h1 className="welcome-title">Welcome</h1>
-                        <h3 className="welcome-subtitle">To TEACH Resident Educator Resources</h3>
+
+                        {/* Left subtitle */}
+                        <h3 className="welcome-subtitle">To TEACH-to-Go!</h3>
                     </div>
 
-                    {/* Right Half */}
+                    {/* Right half */}
                     <div className="welcome-right">
-                        <hr className="separator-2" />
+                        {/* Right header */}
+                        <div className="welcome-right-teach-header">
+                            <p style={{ margin: 0, padding: 0, lineHeight: 1.5 }}>TEACH-to-Go</p>
+                        </div>
+
+                        {/* Divider line */}
+                        <div style={{ width: "100%", textAlign: "left" }}>
+                            <hr className="separator-2" style={{ width: "50%", margin: "5px 0 10px 0" }} />
+                        </div>
+
+                        {/* TEACH to Go description */}
                         <div className="welcome-description">
                             <p style={{marginBottom: "50px"}}>
-                                This page includes a collection of materials and resources for the various topics
-                                and skills hospital residents will learn and master throughout their residency program.
+                                TEACH-to-Go is your mobile companion, offering a comprehensive collection of teaching resources tailored
+                                for health professions educators at Carilion Clinic, the Virginia Tech Carilion School of Medicine,
+                                and Radford University Carilion.
                             </p>
 
                             <p>
-                                All resources are organized into their respective topics below to read and learn more about. 
+                                With TEACH-to-Go, you can:
                             </p>
+                            <ul>
+                                <li>Access Educator Resources</li>
+                                <li>Complete a resident educator self-assessment</li>
+                                <li>Stay Informed: Receive updates on upcoming events and educational opportunities</li>
+                            </ul>
                         </div>
                     </div>
 
-                    {/* Overlay Image */}
+                    {/* Overlay images */}
                     <img src={TeachLogoPlantSmall} alt="Overlay Image" className="welcome-overlay-plant-small" />
                     <img src={TeachLogoPlantMedium} alt="Overlay Image" className="welcome-overlay-plant-medium" />
                     <img src={TeachLogoPlantLarge} alt="Overlay Image" className="welcome-overlay-plant-large" />
                     <img src={TeachLogoRoot} alt="Overlay Image" className="welcome-overlay-root" />
                 </div>
 
-                {/* Black Separator Line */}
+                {/* Black separator line */}
                 <hr className="separator" style={{margin: "40px 0"}} />
                 
+                {/* Section title */}
                 <div className="section-title-container">
-                    <p className="section-title">About the Resident Educator Topics</p>
+                    <p className="section-title">Health Professions Education Resources</p>
                     <hr className="separator-2" />
                 </div>
 
-                {/* Section Descriptions */}
+                {/* Section descriptions */}
                 <div className="section-description">
                     <p> 
-                        As a part of TEACH’s goal to promote and foster a strong community of 
-                        educators and learners at Carilion Clinic, the following topics and resources are 
-                        designed to help build a solid foundation in the various key skills needed as a 
-                        resident educator, enhance teaching abilities, and expand on the subjects to 
-                        foster a deeper understanding of the materials.
+                        As an interactive resource of TEACH Teaching Excellence Academy for Collaborative Healthcare (TEACH),
+                        the purpose of this app is to provide resources and tools to promote learning excellence and fostering
+                        the development of teachers, learners, and education scholars.
                     </p>
 
                     <p>
-                        The following resources cover multiple topics. To learn more about a specific 
+                        The following resources will link to external sites. To learn more about a specific 
                         subject, click on the arrow to expand the menu.
                     </p>
                 </div>
                 
-                <Accordion className="custom-accordion">
+                {/* Resource accordion */}
+                <Accordion className="custom-accordion" ref={accordionRef} defaultActiveKey={defaultKeys} alwaysOpen>
                 {educatorTopic.map((topic, index) => (
-                    <Accordion.Item className="custom-accordion-item" eventKey={index.toString()} key={index} >
-                        <Accordion.Header className="custom-accordion-header">{topic.category}</Accordion.Header>
-                        <Accordion.Body className="custom-accordion-body">
-                            {/* Ensure description is an array before mapping, else display description as text */}
-                            {Array.isArray(topic.description) ? (
+                    <Accordion.Item className="custom-accordion-item" eventKey={index.toString()} key={index}>
+                    <Accordion.Header className="custom-accordion-header">{topic.category}</Accordion.Header>
+                    <Accordion.Body className="custom-accordion-body">
+                        {/* Ensure description is an array before mapping */}
+                        {Array.isArray(topic.description) ? (
+                        <ul>
+                            {topic.description.map((desc, i) => {
+                            // Handle direct resources
+                            if (desc.title) {
+                                return (
+                                <li key={i} style={{ marginBottom: "1rem" }}>
+                                    <a href={desc.url} target="_blank" rel="noopener noreferrer">
+                                    {desc.title}
+                                    </a>
+                                    {desc.source && <> — <em>{desc.source}</em></>}
+                                    {desc.type === "video" && <span> 🎥</span>}
+                                    {desc.type === "article" && <span> 📄</span>}
+                                </li>
+                                );
+                            }
+
+                            // Handle nested structure with subcategory + details
+                            return (
+                                <li key={i} style={{ marginBottom: "1rem" }}>
+                                <strong>{desc.subcategory}</strong>
                                 <ul>
-                                    {topic.description.map((desc, i) => (
-                                        <li key={i}>{desc}</li>
+                                    {desc.details.map((detail, j) => (
+                                    <li key={j} style={{ marginBottom: "1rem" }}>
+                                        <a href={detail.url} target="_blank" rel="noopener noreferrer">
+                                        {detail.title}
+                                        </a>
+                                        {detail.source && <> — <em>{detail.source}</em></>}
+                                        {detail.type === "video" && <span> 🎥</span>}
+                                        {detail.type === "article" && <span> 📄</span>}
+                                    </li>
                                     ))}
                                 </ul>
-                            ) : (
-                                <p>{topic.description}</p>
-                            )}
-                                    </Accordion.Body>
-                                </Accordion.Item>
-                            ))}
+                                </li>
+                            );
+                            })}
+                        </ul>
+                        ) : (
+                        <p>{topic.description}</p>
+                        )}
+                    </Accordion.Body>
+                    </Accordion.Item>
+                ))}
                 </Accordion>
             </div>
 
-            {/* Black Separator Line */}
+            {/* Black separator line */}
             <hr className="separator" style={{margin: "40px 0"}} />
             
-            {/* */}
+            {/* Begin self-assessment box */}
             <div className="accordion-container">
                 <div className="survey-box">
-                    {/* Top Half */}
+                    {/* Top half */}
                     <div className="survey-box-top">
                         Resident Educator Self-Assessment
                     </div>
 
-                    {/* Middle Separator */}
+                    {/* Middle separator */}
                     <div className="survey-box-divider"></div>
 
-                    {/* Bottom Half */}
+                    {/* Bottom half */}
                     <div className="survey-box-bottom">
                         <p style={{ textAlign: "left" }}>
                             This tool is designed to help residents evaluate their confidence and skills across
@@ -155,7 +206,7 @@ export function Home() {
                 </div>
             </div>
 
-            {/* */}
+            {/* Black seperator line */}
             <hr className="separator" />
             
             {/* TEACH logos */}

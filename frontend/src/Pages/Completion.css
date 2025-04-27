@@ -1,26 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
+/* CSS for completion elements */
 .completion-container {
     background-color: #93b8dc !important;
     font-family: "Montserrat", sans-serif;
     font-weight: 500;
-    min-height: 100vh; /* Ensures the background covers the full screen */
-    display: flex; /* Enables flexbox for centering */
-    justify-content: center; /* Centers horizontally */
-    align-items: center; /* Centers vertically */
+    min-height: 100vh; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
 }
 
+/* Completion content header */
 .content-header {
     color:#062b50;
     font-weight: bold;
     font-size: 2.5rem;
 }
 
+/* Completion content description */
 .content-description {
     color:#0d4379;
     font-size: 1.5rem;
 }
 
+/* Completion content divider */
 .content-divider {
     color:#0d4379;
     border: 2px solid #0d4379;
@@ -28,41 +32,51 @@
     margin-bottom: 40px;
 }
 
+/* Completion content box */
 .content-box {
     background-color: white !important;
-    padding: 20px; /* Adds space inside the box */
+    padding: 20px; 
     padding-top: 40px;
-    border-radius: 8px; /* Optional: Rounds the corners */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    max-width: 80%; /* Limits the width */
-    margin: 20px auto; /* Centers the box horizontally */
+    border-radius: 8px; 
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
+    max-width: 80%; 
+    margin: 20px auto;
     margin-top: 6vh;
     min-height: 85vh;
     
     text-align: center;
     display: flex;
-    flex-direction: column; /* Stack elements vertically */
+    flex-direction: column; 
     justify-content: space-between; 
 }
 
+/* Completion areas of weakness domains */
 .content-domains {
     font-size: 1.7rem;
     flex-direction: column;
     justify-content: center;
 }
 
+/* Completion areas of weakness items  */
 .content-domains-items {
     font-weight: 400;
     list-style-type: none;
 }
 
+/* Text if no areas of improvement */
+.no-improvements-text {
+    font-size: 1.7rem;
+    color:#062b50;
+}
+
+/* Home navigation button */
 .content-button {
     color:white;
     background-color:#2b6192;
     margin-top: 40px;
     margin-bottom: 40px;
-    padding: 20px 40px; /* Increase padding to make it larger */
-    font-size: 30px; /* Increase font size */
+    padding: 20px 40px; 
+    font-size: 30px; 
     font-weight: 600;
     border-radius: 8px;
     
@@ -71,15 +85,18 @@
     text-align: center;
 }
 
+/* Contact text */
 .content-contact {
     font-size: 1.3rem;
 }
 
+/* Completion content footer */
 .content-footer {
     font-size: 2.2rem;
     color:#062b50;
 }
 
+/* Mobile adjustments */
 @media (max-width: 768px) {
     .content-header {
         font-size: 1.5rem;
@@ -99,9 +116,13 @@
         list-style-type:disc;
     }
 
+    .no-improvements-text {
+        font-size: 0.8rem;
+    }
+
     .content-button {
-        padding: 15px 30px; /* Increase padding to make it larger */
-        font-size: 16px; /* Increase font size */
+        padding: 15px 30px; 
+        font-size: 16px; 
         max-width: 100vw;
     }
 

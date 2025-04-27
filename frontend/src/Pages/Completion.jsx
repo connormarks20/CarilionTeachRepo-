@@ -1,11 +1,32 @@
+// Functional imports
 import { useNavigate } from "react-router";
 import { useLocation } from "react-router-dom";
-import TeachLogo from "../assets/teachlogowhite.jpg";  
-import './Completion.css';
+import { useState } from "react";
+
+import TeachLogo from "../assets/teachlogowhite.jpg"; /* Teach logo */
+import { educatortopicdata } from "../assets/educatortopicdata.js"; /* Resource data */
+import './Completion.css'; /* CSS import */
 
 export function Completion() {
-    const location = useLocation();
-    const improvementAreas = location.state?.improvementAreas || [];
+    const location = useLocation(); /* Location variable */
+    let navigate = useNavigate(); /* Navigation variable */
+    const improvementAreas = location.state?.improvementAreas || []; /* Improvement areas from Questions.jsx */
+
+    // Maps areas for improvement to accordion indices
+    const mapAreasToAccordionIndices = (areas) => {        
+        return educatortopicdata
+          .map((topic, index) =>
+            areas.includes(topic.category) ? index : null
+          )
+        .filter((i) => i !== null);
+    };
+      
+    // Navigates to home, displaying the relevant resources based on assessment results
+    const navigateHomeWithResources = () => {
+        const matchedIndices = mapAreasToAccordionIndices(improvementAreas);
+        const url = `/?resources=${matchedIndices.join(",")}`;
+        navigate(url);
+    }
 
     return (
         <div className="completion-container">
@@ -30,28 +51,44 @@ export function Completion() {
                 {/* Content divider */}
                 <hr className="content-divider" />
 
-                {/*  */}
+                {/* Areas of improvement */}
                 <div className="content-domains">
                     <p>
                         Review the following teaching domains with associated resources linked to your areas
                         of improvement:
                     </p>
-                    <ul className="content-domains-items">
-                        {improvementAreas.map((area, index) => (
-                            <li key={index}>{area}</li>
-                        ))}
-                    </ul>
+                    
+                    {/* Check if there are improvement areas */}
+                    {improvementAreas.length > 0 ? (
+                    <>
+                        <ul className="content-domains-items">
+                                {improvementAreas.map((area, index) => (
+                                    <li key={index}>{area}</li>
+                                ))}
+                        </ul>
+                    </>
+                    ) : (
+                        <p className="no-improvements-text">
+                            You have identified confidence across all areas of teaching! Recognizing your strengths
+                            is an important step in professional growth. While no immediate areas for development
+                            were identified, continued reflection and feedback from peers and learners can offer
+                            new insights as your teaching environment evolves. We encourage you to remain open to
+                            learning opportunities and consider mentoring others or exploring advanced faculty development
+                            topics to further enhance your impact as an educator.
+                        </p>
+                    )}
                 </div>
 
-                {/*  */}
-                <button className="content-button">Learn More about these Topics</button>
+                {/* Home navigation button */}
+                <button className="content-button" onClick={() => navigateHomeWithResources()}>Learn More about these Topics</button>
                 
-                {/* */}
+                {/* Contact content */}
                 <p className="content-contact">
                     If you have any questions or would like to further discuss your self-assessment results,
-                    please contact Mariah Rudd, mjrudd@carilionclinic.org
+                    please contact Mariah Rudd, <a href="mailto:mjrudd@carilionclinic.org" target="_blank">mjrudd@carilionclinic.org</a>
                 </p>
-
+                
+                {/* Footer content */}
                 <p className="content-footer">
                     Thank you for your dedication to teaching and learning!
                 </p>

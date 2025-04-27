@@ -1,22 +1,36 @@
+// Functional imports
 import { useRef, useState } from "react";
-import { questiondata } from "../assets/questiondata.js";
-import ProgressBar from "../Components/ProgressBar.jsx";
-import { useNavigate } from "react-router";
-import './Questions.css';
-import TeachLogo from "../assets/teachlogowhite.jpg";  
+import { useNavigate } from "react-router-dom"; // Use react-router-dom
 import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
+import ProgressBar from "../Components/ProgressBar.jsx";
+import TeachLogo from "../assets/teachlogowhite.jpg";  
+
+// Data imports
+import { questiondata, programData } from "../assets/questiondata.js"; 
+
+// CSS imports
+import './Questions.css';
 
 const Questions = () => {
-    // Question/answer variables
+    // Self-assessment question/answer variables
     let [index, setIndex] = useState(0); /* Question index state variable */
-    let [question, setQuestion] = useState(questiondata[index]); /* Question data state variable */
+    let [question, setQuestion] = useState(questiondata[0]); /* Question data state variable */
     let [answers, setAnswers] = useState([]);  /* Answer data stored in array */
-    const [improvementAreas, setimprovementAreas] = useState([]); /* Low scoring answers stored in array */
+    let [questionScores, setQuestionScores] = useState([]); /* Array to store scores for each question */
+    const [improvementAreas, setImprovementAreas] = useState([]); /* Low scoring answers stored in array */
     let [showError, setShowError] = useState(false); /* Shows an error if a user selects 'Next' without choosing an answer */
     
-    // Email variable
+    // Resident educator information variables
+    let [program, setProgram] = useState("");
+    let [pgy, setPgy] = useState("");
+    let [numStudents, setNumStudents] = useState("");
+    const numStudentsRef = useRef(null);
+    let [formalEducation, setFormalEducation] = useState("");
+    const formalEducationRef = useRef(null);
+
+    // Email variables
     let [email, setEmail] = useState("");
+    const emailInputRef = useRef(null);
 
     // Progress bar variables
     const [progress, setProgress] = useState(0); /* Progress bar state variable */
@@ -28,249 +42,298 @@ const Questions = () => {
     // Navigation variables
     let navigate = useNavigate(); /* Router navigation variable */
 
-    // Sets question to previous question
+    /**
+     * Sets question to previous question
+     */
     const setPrevQuestion = () => {
         // Clear any show errors
         setShowError(false);
 
         // Set question index and data to previous question
         if (index - 1 >= 0) {
-            setIndex(--index);
-            setQuestion(questiondata[index]);
+            setIndex(index - 1);
+            setQuestion(questiondata[index - 1]);
 
             // Retrieve previous answer
-            setSelectedOption(answers[index]);
+            setSelectedOption(answers[index - 1]);
         }
         
         // Update progress bar 
-        setProgress(Math.max(0, (index) * interval));
+        setProgress(Math.max(0, (index - 1) * interval));
     };
 
-    // Sets question to next question
+    /**
+     * Checks if email matches email format
+     * 
+     * @returns True if matches, false otherwise
+     */
+    const validateEmail = () => {
+        const re = /\S+@\S+\.\S+/;
+        return re.test(email);
+    };
+
+    /**
+     * Sets question to next question
+     * 
+     * Provides email validation and error handling
+     */
     const setNextQuestion = () => {
-        // If we are not on the last question (email page)
-        if (index + 1 < questiondata.length) {
+        // Validation depending on the page
+        if (index === questiondata.length - 2) {
+            // Resident information page
+            if (!program || !pgy || !numStudents || !formalEducation) {
+                setShowError(true);
+                return;
+            }
+        } else if (index === questiondata.length - 1) {
+            // Email input page
+            if (!validateEmail()) {
+                setShowError(true);
+                return;
+            }
+        } else {
+            // Regular question page
             if (!selectedOption) {
                 setShowError(true);
                 return;
             }
-    
-            setShowError(false);
-            setIndex(index + 1);
-            setQuestion(questiondata[index + 1]);
-    
-            if (answers[index + 1] != null) {
-                setSelectedOption(answers[index + 1]);
-            } else {
-                setSelectedOption(null);
-            }
-    
-            setProgress(Math.min(100, (index + 1) * interval));
-        } else {
-            // Last page: validate email and send data
-            console.log("API URL:", import.meta.env.VITE_API_BASE_URL);
-            if (!email || !email.includes("@")) {
-                setShowError(true);
-                return;
-            }
-    
-            setShowError(false);
-    
-            // 🔁 Send the POST request to your backend
+        }
+
+        setShowError(false);
+
+        // If finished answering all questions
+        if (index + 1 === questiondata.length) {
+            // send fetch request to backend 
             fetch(`${import.meta.env.VITE_API_BASE_URL}/send-email`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ email, improvementAreas }),
+                body: JSON.stringify({
+                    email,
+                    improvementAreas,
+                    program,
+                    pgy,
+                    numStudents,
+                    formalEducation
+                }),
             })
-                .then((response) => {
-                    if (!response.ok) {
-                        throw new Error("Failed to send email");
-                    }
-                    return response.json();
-                })
-                .then((data) => {
-                    console.log("Email sent:", data.message);
-    
-                    
-                    setTimeout(() => {
-                        navigate("/Completion", { state: { improvementAreas } });
-                    }, 250);
-                })
-                .catch((error) => {
-                    console.error("Error sending email:", error);
-                    alert("There was a problem sending your email. Please try again.");
-                });
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Failed to send email");
+                }
+                return response.json();
+            })
+            .then((data) => {
+                console.log("Email sent:", data.message);
+
+                // Go to completion page 
+                setTimeout(() => {
+                    navigate("/Completion", { state: { improvementAreas } });
+                }, 250);
+            })
+            .catch((error) => {
+                console.error("Error sending email:", error);
+                alert("There was a problem sending your email. Please try again.");
+            });
+        } else {
+            // Otherwise, move to next question
+            setIndex(index + 1);
+            setQuestion(questiondata[index + 1]);
+            setSelectedOption(answers[index + 1] || null);
+
+            // Update progress bar
+            setProgress(Math.min(100, (index + 1) * interval));
         }
     };
-    
 
-    // Handles the selection of an answer
+    /**
+     * Handles the selection of an answer to the self-assessment questions
+     * 
+     * @param {*} questionIndex Index of the current question
+     * @param {*} option Currently selected answer to question
+     * @param {*} score Score related to selected option
+     * @param {*} category Category of question
+     */
     const handleSelection = (questionIndex, option, score, category) => {
         // Set current selected option
         setSelectedOption(option);
 
-        // Add low scoring category to weakness areas
-        if (score <= 3) {
-            setimprovementAreas((prevScores) => {
-                // Avoid adding duplicates, and only store unique options
-                if (!prevScores.includes(category)) {
-                    return [...prevScores, category];
-                }
-                return prevScores;
+        // Update weakness areas in accordance to resident responses
+        setQuestionScores((prevScores) => {
+            // Copy scores array
+            const newScores = [...prevScores];
+            newScores[questionIndex] = { score, category };
+
+            // Recalculate improvementAreas from updated scores
+            const categoryScores = {};
+            newScores.forEach(({ score, category }) => {
+                if (!categoryScores[category]) categoryScores[category] = [];
+                categoryScores[category].push(score);
             });
-        }
-        
+
+            // Extract low scores
+            const updatedImprovementAreas = Object.entries(categoryScores)
+                .filter(([_, scores]) => scores.some((s) => s <= 3))
+                .map(([cat]) => cat);
+
+            // Set low scores as areas of improvement
+            setImprovementAreas(updatedImprovementAreas);
+
+            return newScores;
+        });
+
         // Updates the entire answers array, adding the new answer
         setAnswers((prevAnswers) => {
             const newAnswers = [...prevAnswers];
             newAnswers[questionIndex] = option;
             return newAnswers;
         });
-    }
-
-    const updateEmail = (value) => {
-        setEmail(value);
     };
+
+    /**
+     * Updates the input resident program
+     */
+    const updateProgram = (newProgram) => setProgram(newProgram);
+
+    /**
+     * Updates the input resident PGY
+     */
+    const updatePgy = (newPgy) => setPgy(newPgy);
+
+    /**
+     * Updates the input number of students taught
+     */
+    const updateNumStudents = (newNumStudents) => setNumStudents(newNumStudents);
+
+    /**
+     * Updates the input formal education response
+     */
+    const updateFormalEducation = (newFormalEducation) => setFormalEducation(newFormalEducation);
+
+    /**
+     * Updates the input resident email
+     */
+    const updateEmail = (newEmail) => setEmail(newEmail);
 
     return (
         <div>
             {/* Horizontal bar at the top */}
             <div className="top-bar">
                 <p className="top-bar-title">Resident Educator Self-Assessment</p>
-                <img src={TeachLogo} style={{height: "80px"}}/>
+                <img src={TeachLogo} alt="Teach Logo" style={{ height: "80px" }} />
             </div>
-
-            {/* <h1 style={{ marginTop: "20px" }}> DEMO v1 </h1>
-            <hr /> */}
 
             {/* Adjust size and position of question text */}
             <div className="question-container">
-                <h2 className="question-text">{question.question}</h2>
+                <h2 className="question-text" dangerouslySetInnerHTML={{ __html: question.question }} />
             </div>
-            
-            {/* If not questionlength - 1, do the below code. If, do input email code*/}
-            {index !== questiondata.length - 1 ? (
-                <>
-                    {/* Error text if user tries to go to next question without answering current question */}
-                    <p style={{ color: "red", fontSize: "20px", textAlign: "center"}}>
-                        {showError && "Please select an answer"}
-                    </p>
 
+            {/* Display different screens based on question index */}
+            {index < questiondata.length - 2 ? (
+                <>
+                    {/* Display radio options */}
+                    {showError && <p style={{ color: "red", textAlign: "center" }}>Please select an answer</p>}
                     <form style={{ marginBottom: "30px" }}>
                         <div className="radio-group">
-                            {/* Quiz answer options and response handling */}
-                            <label 
-                                className={`radio-box ${selectedOption === question.options[0].label ? "selected" : ""}`}
-                                style={{ backgroundColor: "#81b5da" }}>
-                                <input 
-                                    type="radio" 
-                                    name="answer" 
-                                    value={question.options[0].label} 
-                                    checked={selectedOption === question.options[0].label}
-                                    onChange={() => handleSelection(index, question.options[0].label, question.options[0].score, question.category)}/>
-                                {question.options[0].label}
-                            </label>
-
-                            <label 
-                                className={`radio-box ${selectedOption === question.options[1].label ? "selected" : ""}`}
-                                style={{ backgroundColor: "#669bc4" }}>
-
-                                <input 
-                                    type="radio" 
-                                    name="answer" 
-                                    value={question.options[1].label} 
-                                    checked={selectedOption === question.options[1].label}
-                                    onChange={() => handleSelection(index, question.options[1].label, question.options[1].score, question.category)}/>
-                                {question.options[1].label}
-                            </label>
-
-                            <label 
-                                className={`radio-box ${selectedOption === question.options[2].label ? "selected" : ""}`}
-                                style={{ backgroundColor: "#477caa" }}>
-
-                                <input 
-                                    type="radio" 
-                                    name="answer" 
-                                    value={question.options[2].label} 
-                                    checked={selectedOption === question.options[2].label}
-                                    onChange={() => handleSelection(index, question.options[2].label, question.options[2].score, question.category)}/>
-                                {question.options[2].label}
-                            </label>
-
-                            <label 
-                                className={`radio-box ${selectedOption === question.options[3].label ? "selected" : ""}`}
-                                style={{ backgroundColor: "#2b6192" }}>
-
-                                <input 
-                                    type="radio" 
-                                    name="answer" 
-                                    value={question.options[3].label} 
-                                    checked={selectedOption === question.options[3].label}
-                                    onChange={() => handleSelection(index, question.options[3].label, question.options[3].score, question.category)}/>
-                                {question.options[3].label}
-                            </label>
-
-                            <label 
-                                className={`radio-box ${selectedOption === question.options[4].label ? "selected" : ""}`}
-                                style={{ backgroundColor: "#0d4379" }}>
-
-                                <input 
-                                    type="radio" 
-                                    name="answer" 
-                                    value={question.options[4].label} 
-                                    checked={selectedOption === question.options[4].label}
-                                    onChange={() => handleSelection(index, question.options[4].label, question.options[4].score, question.category)}/>
-                                {question.options[4].label}
-                            </label>
+                            {question.options.map((opt, i) => (
+                                <label key={i} className={`radio-box ${selectedOption === opt.label ? "selected" : ""}`}
+                                    style={{ backgroundColor: ["#0d4379", "#2b6192", "#477caa", "#669bc4", "#81b5da"][i] }}>
+                                    <input
+                                        type="radio"
+                                        name="answer"
+                                        value={opt.label}
+                                        checked={selectedOption === opt.label}
+                                        onChange={() => handleSelection(index, opt.label, opt.score, question.category)}
+                                    />
+                                    {opt.label}
+                                </label>
+                            ))}
                         </div>
                     </form>
                 </>
+            ) : index === questiondata.length - 2 ? (
+                <>
+                    {/* Resident information input fields */}
+                    {showError && <p style={{ color: "red", textAlign: "center" }}>Please complete every field</p>}
+                    <div className="programs-wrapper">
+                        {/* Program Select */}
+                        <div className="programs-container">
+                            <p className="program-text">Program:</p>
+                            <Form.Select value={program} onChange={(e) => updateProgram(e.target.value)}>
+                                <option disabled value="">-Select-</option>
+                                {programData[0].program.map((item, i) => (
+                                    <option key={i} value={item}>{item}</option>
+                                ))}
+                            </Form.Select>
+                        </div>
+
+                        {/* PGY Select */}
+                        <div className="programs-container">
+                            <p className="program-text">PGY Level:</p>
+                            <Form.Select value={pgy} onChange={(e) => updatePgy(e.target.value)}>
+                                <option disabled value="">-Select-</option>
+                                {programData[1].pgy.map((item, i) => (
+                                    <option key={i} value={item}>{item}</option>
+                                ))}
+                            </Form.Select>
+                        </div>
+
+                        {/* Number of Students Input */}
+                        <Form.Group className="medical-info-input">
+                            <Form.Label>How many medical students are you typically responsible for teaching?</Form.Label>
+                            <Form.Control
+                                ref={numStudentsRef}
+                                placeholder="Enter your response"
+                                value={numStudents}
+                                onChange={(e) => updateNumStudents(e.target.value)}
+                            />
+                        </Form.Group>
+
+                        {/* Formal Education Input */}
+                        <Form.Group className="medical-info-input-2">
+                            <Form.Label>Have you received any formal education related to teaching?</Form.Label>
+                            <Form.Control
+                                ref={formalEducationRef}
+                                placeholder="Enter your response"
+                                value={formalEducation}
+                                onChange={(e) => updateFormalEducation(e.target.value)}
+                            />
+                        </Form.Group>
+                    </div>
+                </>
             ) : (
                 <>
-                    <p style={{ color: "red", fontSize: "20px", textAlign: "center"}}>
-                            {showError && "Please input a valid email address"}
-                    </p>
-
-                    <Form.Group className="email-input" controlId="exampleForm.ControlInput1">
+                    {/* Email input field */}
+                    {showError && <p style={{ color: "red", textAlign: "center" }}>Please input a valid email address</p>}
+                    <Form.Group className="email-input">
                         <Form.Control
-                        type="email"
-                        placeholder="Enter your email here"
-                        aria-label="Recipient's username"
-                        aria-describedby="basic-addon2"
-                        className="custom-email-input"
-                        onChange={(e) => updateEmail(e.target.value)}
+                            ref={emailInputRef}
+                            type="email"
+                            placeholder="Enter your email here"
+                            value={email}
+                            onChange={(e) => updateEmail(e.target.value)}
                         />
                     </Form.Group>
                 </>
             )}
 
-            {/* Nests progress bar between the Back and Next buttons */}
+            {/* Progress bar and navigation buttons */}
             <div style={{ display: "flex", alignItems: "center", gap: "10px", width: "100%" }}>
-                {/* Shows Back button if not on the first question */}
                 {index > 0 ? (
-                    <button style={{ backgroundColor: "#062b50", color: "white"}} onClick={setPrevQuestion}>
-                        Back
-                    </button>
-                ) : (
-                    <div style={{ width: "80px" }}></div> 
-                )}
+                    <button style={{ backgroundColor: "#062b50", color: "white" }} onClick={setPrevQuestion}>Back</button>
+                ) : <div style={{ width: "80px" }}></div>}
 
-                {/* Progress bar */}
                 <div style={{ flexGrow: 1 }}>
                     <ProgressBar bgcolor="#062b50" progress={progress} height={30} />
                 </div>
 
-                {/* Shows Next button if not on the last question */}
-                {index + 1 < questiondata.length ? (
-                   <button style={{ backgroundColor: "#062b50", color: "white"}} onClick={setNextQuestion}>Next</button>
-                ) : (
-                    <button type="submit" style={{ backgroundColor: "#062b50", color: "white"}} onClick={setNextQuestion}>Finish</button>
-                )}
+                <button style={{ backgroundColor: "#062b50", color: "white" }} onClick={setNextQuestion}>
+                    {index + 1 < questiondata.length ? "Next" : "Finish"}
+                </button>
             </div>
         </div>
-    )
+    );
 }
 
 export default Questions;
