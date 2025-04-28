@@ -39,7 +39,7 @@
     display: flex;
     position: relative; 
     width: 100%;
-    height: 750px; 
+    min-height: 80vh; 
 }
 
 /* Welcome left half container */
@@ -320,7 +320,7 @@
 
 @media (max-height: 844px) {
     .welcome-section {
-        height: 100vh;
+        height: 95vh;
     }
 }
 
@@ -359,7 +359,7 @@
     }
 
     .welcome-section {
-        min-height: 700px;
+        height: 100vh;
     }
 
     .welcome-left,
