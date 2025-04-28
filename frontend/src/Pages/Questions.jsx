@@ -105,13 +105,42 @@ const Questions = () => {
             if (validateEmail() == true) {
                 // Email validation successful, clear any errors
                 setShowError(false);
-                
-                // Navigate to completion page
-                setTimeout(() => {
-                    navigate("/Completion", {state: { improvementAreas } }); 
-                  }, 250);
-            }
-            else {
+        
+                // Send fetch request to backend
+                fetch(`${import.meta.env.VITE_API_BASE_URL}/send-email`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        email,
+                        improvementAreas,
+                        program,
+                        pgy,
+                        numStudents,
+                        formalEducation
+                    }),
+                })
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Failed to send email");
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    console.log("Email sent:", data.message);
+        
+                    // Go to completion page 
+                    setTimeout(() => {
+                        navigate("/Completion", { state: { improvementAreas } });
+                    }, 250);
+                })
+                .catch((error) => {
+                    console.error("Error sending email:", error);
+                    alert("There was a problem sending your email. Please try again.");
+                });
+        
+            } else {
                 // Email validation failed, show error
                 setShowError(true);
             }
@@ -466,5 +495,6 @@ const Questions = () => {
         </div>
     )
 }
+
 
 export default Questions;
