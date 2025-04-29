@@ -203,7 +203,6 @@ const Questions = () => {
      */
     const updateProgram = (newProgram) => {
         setProgram(newProgram);
-        console.log("new program " + newProgram);
     }
 
     /**
@@ -213,7 +212,6 @@ const Questions = () => {
      */
     const updatePgy = (newPgy) => {
         setPgy(newPgy);
-        console.log("new pgy " + newPgy);
     }
 
     /**
@@ -223,7 +221,6 @@ const Questions = () => {
      */
     const updateNumStudents = (newNumStudents) => {
         setNumStudents(newNumStudents);
-        console.log("new num students " + newNumStudents);
     }
 
     /**
@@ -233,7 +230,6 @@ const Questions = () => {
      */
     const updateFormalEducation = (newFormalEducation) => {
         setFormalEducation(newFormalEducation);
-        console.log("new formal education" + newFormalEducation);
     }
 
     /**
