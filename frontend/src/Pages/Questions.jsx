@@ -30,6 +30,7 @@ const Questions = () => {
     const numStudentsRef = useRef(null);
     let [formalEducation, setFormalEducation] = useState("");
     const formalEducationRef = useRef(null);
+    const reiMaxLength = 250;
 
     // Email variables
     let [email, setEmail] = useState("");
@@ -389,7 +390,7 @@ const Questions = () => {
                     {/* Resident number of students input field */}
                     <Form>
                         <Form.Group className="medical-info-input">
-                            <Form.Label className="medical-info-label">How many medical students are you typically responsible for teaching?</Form.Label>
+                            <Form.Label className="medical-info-label">How many medical students are you typically responsible for teaching? (Max {reiMaxLength} characters)</Form.Label>
 
                             <Form.Control
                             ref={numStudentsRef}
@@ -398,6 +399,7 @@ const Questions = () => {
                             aria-describedby="basic-addon2"
                             className="custom-email-input"
                             value={numStudents}
+                            maxLength={reiMaxLength}
                             onChange={(g) => updateNumStudents(g.target.value)}
                             onKeyDown={(event) => {
                                 // Prevent page refresh and close input field when enter is pressed
@@ -413,7 +415,7 @@ const Questions = () => {
                     {/* Resident formal education input field */}
                     <Form>
                         <Form.Group className="medical-info-input-2">
-                            <Form.Label className="medical-info-label">Have you received any formal education related to developing your skills as a teacher?</Form.Label>
+                            <Form.Label className="medical-info-label">Have you received any formal education related to developing your skills as a teacher? (Max {reiMaxLength} characters)</Form.Label>
                             <Form.Control
                             ref={formalEducationRef}
                             placeholder="Enter your response here"
@@ -421,6 +423,7 @@ const Questions = () => {
                             aria-describedby="basic-addon2"
                             className="custom-email-input"
                             value={formalEducation}
+                            maxLength={reiMaxLength}
                             onChange={(h) => updateFormalEducation(h.target.value)}
                             onKeyDown={(event) => {
                                 // Prevent page refresh and close input field when enter is pressed
