@@ -2,8 +2,24 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 const nodemailer = require("nodemailer");
+const { ConfidentialClientApplication } = require("@azure/msal-node")
+/* https://techcommunity.microsoft.com/discussions/outlookgeneral/how-to-send-emails-thru-nodemailer-node-js-from-outlook-smtp-disabled/3918939 */
 
 const app = express();
+const config = {
+  auth:{
+    clientId: process.env.CLIENT_ID,
+    authority: `https://login.microsoftonline.com/${process.env.SECRET_ID}`,
+    clientSecret: process.env.SECRET,
+  }
+};
+const cca = new ConfidentialClientApplication(config);
+const getAccessToken = async () => {
+  const result = await cca.acquireTokenByClientCredential({
+    scopes: ['https://outlook.office365.com/.default'],
+  });
+  return result.accessToken;
+};
 
 app.use(cors());
 app.use(express.json());
@@ -13,17 +29,21 @@ const router = express.Router();
 
 router.post("/send-email", async (req, res) => {
   const { email, improvementAreas } = req.body;
+  const accessToken = await getAccessToken();
 
   const transporter = nodemailer.createTransport({
-    service: "Gmail", 
+    host: 'smtp.office365.com',
+    port: 587,
+    secure: false,
     auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
+      type: "OAuth2",
+      user: process.env.EMAIL_ADDRESS,
+      accessToken: accessToken,
     },
   });
 
   const mailOptions = {
-    from: `"Carilion Teach Survey" <${process.env.EMAIL_USER}>`,
+    from: `"Carilion Teach Survey" <${process.env.EMAIL_ADDRESS}>`,
     to: email,
     subject: "Thank You for Completing the Resident Educator Skills Self-Assessment",
     text: 
@@ -34,7 +54,7 @@ Based on your responses, you have identified the following areas of opportunity 
 
 -${improvementAreas.join('\n- ')}
 
-Use the link below to access targeted resources related to these areas.
+Please visit the ’Health Professions Education Resources’ portion of our site (${process.env.FRONTEND_URL}) for targeted resources related to these areas.
 
 If you would like to discuss your results, please don’t hesitate to reach out to TEACH at teach@carilionclinic.org.
 
